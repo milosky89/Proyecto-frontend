@@ -1,0 +1,58 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+    <div class="page-wrapper">
+
+<!-- ============================================================== -->
+<!-- container-fluid  -->
+<!-- ============================================================== -->
+      <div class="container-fluid pt-0">
+
+      <!-- Breadcrumbs -->
+        <app-breadcrumbs></app-breadcrumbs>
+
+
+
+      <!-- Mi sistema de rutas -->
+        <div class="row">
+          <div class="col-12">
+              <div class="card" style="border-radius: 25px">
+                  <div class="card-body">
+                      <router-outlet></router-outlet>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- Fin Mi sistema de rutas -->
+      </div>
+<!-- ============================================================== -->
+<!-- End container-fluid  -->
+<!-- ============================================================== -->
+
+
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+      <footer class="footer text-center">
+        © 2022 Tecnologíco de Antioquia - Elaborado con <a href="https://www.wrappixel.com/">wrappixel.com</a>
+      </footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+    </div>
+<!-- ============================================================== -->
+<!-- End Page wrapper -->
+<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End page wrapper -->
+<!-- ============================================================== -->
