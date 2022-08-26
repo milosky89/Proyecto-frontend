@@ -9,7 +9,7 @@ body {
   padding-bottom: 8px;
 
   .logo {
-      height: 25px;
+      height: 50px;
   }
 }
 
@@ -63,20 +63,37 @@ body {
       }
 
       .login-btn {
-          padding: 13px 20px;
-          background-color: #fdbb28;
-          border-radius: 0;
-          font-size: 20px;
-          font-weight: bold;
-          color: #fff;
-          margin-bottom: 14px;
+        padding: 13px 20px;
+        background-color: #089065;
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 14px;
 
-          &:hover {
-              border: 1px solid #fdbb28;
-              background-color: #fff;
-              color: #fdbb28;
-          }
-      }
+        &:hover {
+            border: 1px solid #089065;
+            background-color: #fff;
+            color: #089065;
+        }
+    }
+
+    .login-btn2 {
+      padding: 13px 20px;
+      background-color: #6C6C6C;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 14px;
+
+      &:hover {
+        border: 1px solid #6C6C6C;
+        background-color: #fff;
+        color: #6C6C6C;
+    }
+
+    }
 
       a.forgot-password-link {
           color: #080808;

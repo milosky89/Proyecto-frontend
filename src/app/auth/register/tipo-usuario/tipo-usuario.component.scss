@@ -63,24 +63,8 @@ body {
       }
 
       .login-btn {
-          padding: 13px 20px;
-          background-color: #1E5A91;
-          border-radius: 0;
-          font-size: 20px;
-          font-weight: bold;
-          color: #fff;
-          margin-bottom: 14px;
-
-          &:hover {
-              border: 1px solid #1E5A91;
-              background-color: #fff;
-              color: #1E5A91;
-          }
-      }
-
-      .login-btn2 {
         padding: 13px 20px;
-        background-color: #6C6C6C;
+        background-color: #089065;
         border-radius: 20px;
         font-size: 20px;
         font-weight: bold;
@@ -88,10 +72,27 @@ body {
         margin-bottom: 14px;
 
         &:hover {
-            border: 1px solid #6C6C6C;
+            border: 1px solid #089065;
             background-color: #fff;
-            color: #6C6C6C;
+            color: #089065;
         }
+    }
+
+    .login-btn2 {
+      padding: 13px 20px;
+      background-color: #A26E07;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 14px;
+
+      &:hover {
+        border: 1px solid #A26E07;
+        background-color: #fff;
+        color: #A26E07;
+    }
+
     }
 
       a.forgot-password-link {

@@ -1,0 +1,50 @@
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 login-section-wrapper" style="padding-left: 150px">
+        <div class="brand-wrapper">
+          <img src="././assets/login/images/logo1.png" alt="logo" class="logo">
+        </div>
+
+          <div class="login-wrapper my-auto" style="width: 600px;">
+          <h1 class="login-title" style="text-align:center ; margin-bottom: 60px;">TIPO DE USUARIO</h1>
+
+
+          <div class="row">
+            <div class="col sm-6">
+              <div class="card" >
+                <img src="././assets/login/images/perro1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text" style="text-align:center ;">Eres dueño de una mascota o quieres adoptar una</p>
+                  <button type="button" class="btn btn-block login-btn" [routerLink]="['/persona']">
+                    <i class="me-3 fa fa-user" aria-hidden="true"></i>Persona</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col sm-6">
+              <div class="card" >
+                <img src="././assets/login/images/gato4.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text" style="text-align:center ;">Tienes una empresa y amas las mascotas</p>
+                  <button type="button" class="btn btn-block login-btn2" [routerLink]="['/empresa']">
+                    <i class="me-3 fa-solid fa-paw" aria-hidden="true"></i>Empresa</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <a [routerLink]="['/login']" class="forgot-password-link">Regresar</a>
+        </div>
+      </div>
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <img src="././assets/login/images/cachorro.jpg" alt="login image" class="login-img">
+      </div>
+    </div>
+  </div>
+  </main>
+
+
