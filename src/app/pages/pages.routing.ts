@@ -9,6 +9,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { MascotaComponent } from './mascota/mascota.component';
 import { AnalisisComponent } from './analisis/analisis.component';
 import { InformacionComponent } from './informacion/informacion.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
     {
       path: '',
       component: PagesComponent,
+      canActivate: [AuthGuard],
       children: [
         {path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'}},
         {path: 'perfil', component: PerfilComponent,data: {titulo: 'Mi Perfil'}},
