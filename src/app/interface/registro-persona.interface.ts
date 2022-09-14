@@ -1,5 +1,5 @@
 
- export interface personaForm {
+ export interface personaForm{
 
   nombre: string,
   apellido: string,
