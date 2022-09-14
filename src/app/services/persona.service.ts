@@ -16,6 +16,10 @@ export class PersonaService {
 
   constructor(private http: HttpClient) { }
 
+  logout(){
+    localStorage.removeItem('token')
+  }
+
   validarToken(): Observable<boolean>{
       const token = localStorage.getItem('token') || '';
 
