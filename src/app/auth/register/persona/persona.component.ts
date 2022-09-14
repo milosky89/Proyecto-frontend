@@ -16,16 +16,16 @@ export class PersonaComponent implements OnInit {
 
   public usuarioForm:FormGroup = this.fb.group({
 
-    nombre: ['emilio', Validators.required,],
-    apellido: ['garcia',Validators.required],
-    tipoDocumento: ['Pasaporte',Validators.required],
-    numeroDocumento: ['12335',[Validators.required, Validators.minLength(3)]],
-    ciudad: ['Medellín',Validators.required,],
-    direccion: ['cale 12',Validators.required],
-    comuna: ['Comuna 1 - Popular',Validators.required],
-    celular: ['123135',Validators.required],
-    email: ['prueba1@yopmail.com',[Validators.required, Validators.minLength(3),Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-    clave:['123456',[Validators.required, Validators.minLength(5),Validators.maxLength(8)]]
+    nombre: ['', Validators.required,],
+    apellido: ['',Validators.required],
+    tipoDocumento: ['',Validators.required],
+    numeroDocumento: ['',[Validators.required, Validators.minLength(3)]],
+    ciudad: ['',Validators.required,],
+    direccion: ['',Validators.required],
+    comuna: ['',Validators.required],
+    celular: ['',Validators.required],
+    email: ['',[Validators.required, Validators.minLength(3),Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+    clave:['',[Validators.required, Validators.minLength(5),Validators.maxLength(8)]]
   });
 
 

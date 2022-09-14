@@ -16,7 +16,7 @@ export class LoginComponent  {
   public loginForm:FormGroup = this.fb.group({
 
     email: [localStorage.getItem('email') || '',[Validators.required, Validators.minLength(3),Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-    clave:['123456',[Validators.required, Validators.minLength(5),Validators.maxLength(8)]],
+    clave:['',[Validators.required, Validators.minLength(5),Validators.maxLength(8)]],
     recordarme: [false]
   });
 
