@@ -8,75 +8,105 @@
 
         <div class="login-wrapper my-auto" style="width: 500px; margin-left: 60px;">
           <h1 class="login-title" style="text-align:center ; margin-bottom: 60px;">REGISTRO NUEVO USUARIO</h1>
-          <form action="#!">
+
+          <form
+          [formGroup]="usuarioForm"
+          (ngSubmit)="crearPersona()">
 
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="">Nombre</label>
-                <input type="text" class="form-control" id="">
+                <input  type="text"
+                        class="form-control"
+                        formControlName="nombre">
+                        <p class="col text-danger" *ngIf="campoNoValido('nombre')" >* El nombre es obligatorio</p>
               </div>
               <div class="form-group col-md-6">
                 <label for="">Apellido</label>
-                <input type="text" class="form-control" id="">
+                <input type="text"
+                       class="form-control"
+                       formControlName="apellido">
+                       <p class="col text-danger" *ngIf="campoNoValido('apellido')" >* El apellido es obligatorio</p>
               </div>
+
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputState">Tipo de documento</label>
-                <select id="inputState" class="form-control">
-                  <option selected>Selecione...</option>
-                  <option>Cedula</option>
-                  <option>Pasaporte</option>
-                  <option>Tarjeta de identidad</option>
+                <select class="form-control"
+                        formControlName="tipoDocumento">
+                  <option value="" selected>Selecione...</option>
+                  <option
+                    *ngFor="let tipoDocumento of tipoDocumentos"
+                    [value]="tipoDocumento">
+                    {{tipoDocumento}}
+                  </option>
                 </select>
+                <p class="col text-danger" *ngIf="campoNoValido('tipoDocumento')" >* El tipo de documento es obligatorio</p>
               </div>
               <div class="form-group col-md-6">
                 <label for="">Número del documento</label>
-                <input type="text" class="form-control" id="">
+                <input type="text"
+                       class="form-control"
+                       formControlName="numeroDocumento">
+                       <p class="col text-danger" *ngIf="campoNoValido('numeroDocumento')" >* El número de documento es obligatorio</p>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="">Ciudad</label>
-                <input type="text" class="form-control" id="">
+                <input type="text"
+                       class="form-control"
+                       formControlName="ciudad">
               </div>
               <div class="form-group col-md-8">
                 <label for="">Dirección</label>
-                <input type="text" class="form-control" id="">
+                <input type="text"
+                       class="form-control"
+                       formControlName="direccion">
+                       <p  class="col text-danger" *ngIf="campoNoValido('direccion')" >* La dirreción es obligatorio</p>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputState">Comuna</label>
-                <select id="inputState" class="form-control">
-                  <option selected>Selecione...</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
+                <label>Comuna</label>
+                <select class="form-control"
+                        formControlName="comuna">
+                  <option value="" selected>Selecione...</option>
+                  <option
+                    *ngFor="let comuna of comunas"
+                    [value]="comuna">
+                    {{comuna}}
+                  </option>
                 </select>
+                <p class="col text-danger" *ngIf="campoNoValido('comuna')" >* La comuna es obligatorio</p>
               </div>
               <div class="form-group col-md-6">
                 <label for="">Celular</label>
-                <input type="number" class="form-control" id="">
+                <input type="number"
+                       class="form-control"
+                       formControlName="celular">
+                       <p class="col text-danger" *ngIf="campoNoValido('celular')" >* El celular es obligatorio</p>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="exampleInputEmail1">Correo Electronico</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <label for="exampleInputEmail1">Correo Electrónico</label>
+              <input type="email"
+                     class="form-control"
+                     formControlName="email">
+                     <p class="col text-danger" *ngIf="campoNoValido('email')" >* El correo electrónico es obligatorio</p>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password"
+                     class="form-control"
+                     formControlName="clave">
+                     <p class="col text-danger" *ngIf="campoNoValido('clave')" >* La contraseña es obligatorio</p>
             </div>
 
-
             <div class="form-group" style="margin-top: 50px;">
-              <button type="button" class="btn btn-block login-btn2">Registrar</button>
+              <button type="submit" class="btn btn-block login-btn2">Registrar</button>
             </div>
           </form>
           <a [routerLink]="['/tipoUsuario']" class="forgot-password-link">Regresar</a>

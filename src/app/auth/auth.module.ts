@@ -6,7 +6,9 @@ import { PersonaComponent } from './register/persona/persona.component';
 import { TipoUsuarioComponent } from './register/tipo-usuario/tipo-usuario.component';
 import { OlvidoContrasenaComponent } from './olvido-contrasena/olvido-contrasena.component';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { CamposService } from './register/persona/services/campos.service';
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -27,7 +29,13 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers:[
+    CamposService
   ]
 })
 export class AuthModule { }
