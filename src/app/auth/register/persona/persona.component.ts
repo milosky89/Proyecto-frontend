@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { CamposService } from './services/campos.service';
+import { PersonaService } from '../../../services/persona.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-persona',
@@ -12,8 +14,9 @@ export class PersonaComponent implements OnInit {
   public fomrSubmitted = false;
 
   public usuarioForm = this.fb.group({
-    nombre: ['',[Validators.required, Validators.minLength(3)]],
-    apellido: ['',[Validators.required, Validators.minLength(3)]],
+
+    nombre: ['',Validators.required,],
+    apellido: ['',Validators.required],
     tipoDocumento: ['',Validators.required],
     numeroDocumento: ['',[Validators.required, Validators.minLength(3)]],
     ciudad: [{value:'Medellín', disabled:true},Validators.required,],
@@ -29,7 +32,8 @@ export class PersonaComponent implements OnInit {
   comunas: String[] = [];
 
   constructor(private fb: FormBuilder,
-              private camposService:CamposService) { }
+              private camposService:CamposService,
+              private personaService: PersonaService) { }
 
   ngOnInit(): void {
       this.tipoDocumentos = this.camposService.tipoDocumentos;
@@ -39,6 +43,20 @@ export class PersonaComponent implements OnInit {
   crearPersona(){
     this.fomrSubmitted = true;
     console.log(this.usuarioForm.value);
+
+    if(this.usuarioForm.invalid){
+      return;
+    }
+
+    //Realizar posteo
+    this.personaService.crearPersona(this.usuarioForm.value)
+        .subscribe( resp => {
+            console.log('Usuario persona creado'),
+            console.log(resp);
+        }, (err)=> {
+          Swal.fire('Error', err.error.msg, 'error');
+        });
+
 
   }
 
