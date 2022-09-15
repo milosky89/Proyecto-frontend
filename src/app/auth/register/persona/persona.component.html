@@ -54,40 +54,25 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4">
-                <label>Ciudad</label>
-                <input type="text"
-                       class="form-control"
-                       formControlName="ciudad">
-              </div>
-              <div class="form-group col-md-8">
-                <label>Dirección</label>
-                <input type="text"
-                       class="form-control"
-                       formControlName="direccion">
-                       <p  class="col text-danger" *ngIf="campoNoValido('direccion')" >* La dirreción es obligatorio</p>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label>Comuna</label>
-                <select class="form-control"
-                        formControlName="comuna">
-                  <option value="" selected>Selecione...</option>
-                  <option
-                    *ngFor="let comuna of comunas"
-                    [value]="comuna">
-                    {{comuna}}
-                  </option>
-                </select>
-                <p class="col text-danger" *ngIf="campoNoValido('comuna')" >* La comuna es obligatorio</p>
-              </div>
               <div class="form-group col-md-6">
                 <label>Celular</label>
-                <input type="number"
+                <input type="text"
                        class="form-control"
                        formControlName="celular">
-                       <p class="col text-danger" *ngIf="campoNoValido('celular')" >* El celular es obligatorio</p>
+                       <p class="col text-danger" *ngIf="campoNoValido('celular')" >* El número de celular es obligatorio</p>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Tipo de Usuario</label>
+                <select class="form-control"
+                        formControlName="tipoUsuario">
+                  <option value="" selected>Selecione...</option>
+                  <option
+                    *ngFor="let tipoUsuario of tipoUsuarios"
+                    [value]="tipoUsuario">
+                    {{tipoUsuario}}
+                  </option>
+                </select>
+                <p class="col text-danger" *ngIf="campoNoValido('tipoUsuario')" >* El tipo de usuario es obligatorio</p>
               </div>
             </div>
 
@@ -110,7 +95,7 @@
               <button type="submit" class="btn btn-block login-btn2">Registrar</button>
             </div>
           </form>
-          <a [routerLink]="['/tipoUsuario']" class="forgot-password-link">Regresar</a>
+          <a [routerLink]="['/login']" class="forgot-password-link">Regresar</a>
         </div>
       </div>
       <div class="col-sm-6 px-0 d-none d-sm-block">
