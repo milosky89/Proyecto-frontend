@@ -9,6 +9,12 @@ export class CamposService{
     return[...this._tipoDocumentos];
   }
 
+  private _tipoUsuarios: string[] = ['Persona','Empresa'];
+
+  get tipoUsuarios(): string[]{
+    return[...this._tipoUsuarios];
+  }
+
   private _comunas: string[] = [
     'Comuna 1 - Popular',
     'Comuna 2 - Santa Cruz',
@@ -36,5 +42,7 @@ export class CamposService{
   get comunas(): string[]{
     return[...this._comunas];
   }
+
+
 
 }
