@@ -12,7 +12,7 @@ import { MascotaComponent } from './mascota/mascota.component';
 import { AnalisisComponent } from './analisis/analisis.component';
 import { InformacionComponent } from './informacion/informacion.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -37,6 +37,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule]
+    RouterModule,
+    NgChartsModule,
+]
 })
 export class PagesModule { }

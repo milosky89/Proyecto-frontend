@@ -4,7 +4,7 @@
   <!-- ============================================================== -->
   <div class="row">
       <!-- Column -->
-      <div class="col-sm-4">
+      <div class="col-3">
         <div class="card" style="border-radius: 25px;">
 
               <div class="card-body" >
@@ -12,7 +12,7 @@
                   <!-- Column -->
                   <div class="col d-flex align-items-center">
                     <div>
-                      <h1 class="fw-light">10</h1>
+                      <h1 class="fw-light">{{argumento1}}</h1>
                       <h6 class="text-muted-1 mb-0 fw-normal">
                         Personas
                       </h6>
@@ -31,14 +31,14 @@
       </div>
       <!-- Column -->
       <!-- Column -->
-      <div class="col-sm-4">
+      <div class="col-3">
         <div class="card" style="border-radius: 25px;">
               <div class="card-body" >
                 <div class="row py-2">
                   <!-- Column -->
                   <div class="col d-flex align-items-center">
                     <div>
-                      <h1 class="fw-light">5</h1>
+                      <h1 class="fw-light">{{argumento2}}</h1>
                       <h6 class="text-muted-1 mb-0 fw-normal">
                         Empresas
                       </h6>
@@ -56,8 +56,7 @@
         </div>
       </div>
       <!-- Column -->
-      <!-- Column -->
-      <div class="col-sm-4">
+      <div class="col-3">
         <div class="card" style="border-radius: 25px;">
 
               <div class="card-body" >
@@ -65,16 +64,16 @@
                   <!-- Column -->
                   <div class="col d-flex align-items-center">
                     <div>
-                      <h1 class="fw-light">15</h1>
+                      <h1 class="fw-light">20</h1>
                       <h6 class="text-muted-1 mb-0 fw-normal">
-                        Total Usuarios
+                        Perros
                       </h6>
                     </div>
                   </div>
                   <!-- Column -->
                   <div class="col d-flex align-items-center justify-content-end">
                     <div>
-                      <img src="./assets/images/dashboard/4.png" style="width:70px; height: 67px;">
+                      <img src="./assets/images/dashboard/dashboard 1.png"  style="width:70px; height: 67px;">
                     </div>
                   </div>
                 </div>
@@ -83,38 +82,7 @@
         </div>
       </div>
     <!-- Column -->
-  </div>
-
-  <div class="row">
-    <!-- Column -->
-    <div class="col-sm-4">
-      <div class="card" style="border-radius: 25px;">
-
-            <div class="card-body" >
-              <div class="row py-2">
-                <!-- Column -->
-                <div class="col d-flex align-items-center">
-                  <div>
-                    <h1 class="fw-light">20</h1>
-                    <h6 class="text-muted-1 mb-0 fw-normal">
-                      Perros
-                    </h6>
-                  </div>
-                </div>
-                <!-- Column -->
-                <div class="col d-flex align-items-center justify-content-end">
-                  <div>
-                    <img src="./assets/images/dashboard/dashboard 1.png"  style="width:70px; height: 67px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-      </div>
-    </div>
-    <!-- Column -->
-    <!-- Column -->
-    <div class="col-sm-4">
+    <div class="col-3">
       <div class="card" style="border-radius: 25px;">
             <div class="card-body" >
               <div class="row py-2">
@@ -138,66 +106,41 @@
 
       </div>
     </div>
-    <!-- Column -->
-    <!-- Column -->
-    <div class="col-sm-4">
-      <div class="card" style="border-radius: 25px;">
+  </div>
 
-            <div class="card-body" >
-              <div class="row py-2">
-                <!-- Column -->
-                <div class="col d-flex align-items-center">
-                  <div>
-                    <h1 class="fw-light">35</h1>
-                    <h6 class="text-muted-1 mb-0 fw-normal">
-                      Total Mascotas
-                    </h6>
-                  </div>
-                </div>
-                <!-- Column -->
-                <div class="col d-flex align-items-center justify-content-end">
-                  <div>
-                    <img src="./assets/images/dashboard/4.png"  style="width:70px; height: 67px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-      </div>
-    </div>
-  <!-- Column -->
-</div>
   <!-- ============================================================== -->
   <!-- Sales chart -->
   <!-- ============================================================== -->
   <div class="row">
       <!-- column -->
-      <div class="col-sm-6">
+      <div class="col-6">
           <div class="card"  style="border-radius: 25px">
               <div class="card-body">
                   <h4 class="card-title">Usuarios</h4>
-                  <div class="flot-chart">
-                      <div class="flot-chart-content " id="flot-line-chart"
-                          style="padding: 0px; position: relative;">
-                          <canvas class="flot-base w-100" height="400"></canvas>
-                      </div>
-                  </div>
+                  <canvas baseChart class="flot-base w-100" height="500"
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [type]="barChartType"
+                  >
+                </canvas>
               </div>
           </div>
       </div>
       <!-- column -->
 
         <!-- column -->
-        <div class="col-sm-6">
-          <div class="card" style="border-radius: 25px">
-              <div class="card-body" >
+        <div class="col-6">
+          <div class="card"  style="border-radius: 25px">
+              <div class="card-body">
                   <h4 class="card-title">Mascotas</h4>
-                  <div class="flot-chart">
-                      <div class="flot-chart-content " id="flot-line-chart"
-                          style="padding: 0px; position: relative;">
-                          <canvas class="flot-base w-100" height="400"></canvas>
-                      </div>
-                  </div>
+                  <canvas baseChart class="flot-base w-100" height="500"
+                  [data]="barChartData2"
+                  [options]="barChartOptions2"
+                  [plugins]="barChartPlugins2"
+                  [type]="barChartType2">
+                  >
+                </canvas>
               </div>
           </div>
       </div>
