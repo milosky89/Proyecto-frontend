@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { LoginForm } from '../interface/login-form.interface';
 import {catchError, tap} from 'rxjs/operators'
 import { map, Observable, of } from 'rxjs';
+import { Persona } from '../models/persona.model';
 
 
 const base_url = environment.base_url;
@@ -13,6 +14,8 @@ const base_url = environment.base_url;
   providedIn: 'root'
 })
 export class PersonaService {
+
+  public persona: Persona | undefined;
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +32,12 @@ export class PersonaService {
           }
       }).pipe(
           tap((resp: any)=>{
+            const {nombre,apellido,tipoDocumento,numeroDocumento,celular,tipoUsuario,email,role,estado,uid,img
+                  } = resp.persona;
+
+            this.persona = new Persona(nombre,apellido,tipoDocumento,numeroDocumento,tipoUsuario,celular,email,'',uid,img,role,estado);
             localStorage.setItem('token',resp.token);
+
           }),
           map( resp => true),
           catchError(error => of(false))

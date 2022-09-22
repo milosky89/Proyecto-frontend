@@ -1,0 +1,29 @@
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 login-section-wrapper" style="padding-left: 150px">
+        <div class="brand-wrapper">
+          <img src="././assets/login/images/logo1.png" alt="logo" class="logo">
+        </div>
+
+        <div class="login-wrapper my-auto" style="width: 500px; margin-left: 60px;">
+          <h1 class="login-title" style="text-align:center ; margin-bottom: 60px;">Ingrese una nueva contraseña</h1>
+          <form action="#!">
+
+            <div class="form-group">
+              <label for="inputAddress">Contraseña</label>
+              <input type="email" class="form-control" id="inputAddress" >
+            </div>
+            <div class="form-group" style="margin-top: 50px;">
+              <button type="button" class="btn btn-block login-btn2">Guardar</button>
+            </div>
+          </form>
+          <a [routerLink]="['/login']" class="forgot-password-link">Regresar</a>
+        </div>
+      </div>
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <img src="././assets/login/images/perro2.jpg" alt="login image" class="login-img">
+      </div>
+    </div>
+  </div>
+  </main>

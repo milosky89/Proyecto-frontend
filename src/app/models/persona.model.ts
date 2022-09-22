@@ -13,7 +13,8 @@ export class Persona {
       public clave: string,
       public uid?: string,
       public img? : string,
-      public role?: string
+      public role?: string,
+      public estado?:string,
       ){}
 
 

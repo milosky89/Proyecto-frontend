@@ -6,7 +6,8 @@ import { OlvidoContrasenaComponent } from './olvido-contrasena/olvido-contrasena
 import { RouterModule } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CamposService } from './register/persona/services/campos.service';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { NuevaClaveComponent } from './nueva-clave/nueva-clave.component'
 
 
 @NgModule({
@@ -14,12 +15,14 @@ import { HttpClientModule } from '@angular/common/http'
     LoginComponent,
     PersonaComponent,
     OlvidoContrasenaComponent,
+    NuevaClaveComponent,
   ],
   exports:[
     LoginComponent,
     LoginComponent,
     PersonaComponent,
     OlvidoContrasenaComponent,
+    NuevaClaveComponent
   ],
   imports: [
     CommonModule,

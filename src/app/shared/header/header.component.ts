@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PersonaService } from '../../services/persona.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Persona } from 'src/app/models/persona.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent  {
+export class HeaderComponent implements OnInit {
+
+  nombreUsuario:Persona| undefined;
 
   constructor(private personaService: PersonaService,
               private router: Router) { }
+
+
+    ngOnInit(): void {
+    }
+
 
     logout(){
 
