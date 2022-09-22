@@ -37,7 +37,7 @@ export class PersonaService {
 
             this.persona = new Persona(nombre,apellido,tipoDocumento,numeroDocumento,tipoUsuario,celular,email,'',uid,img,role,estado);
             localStorage.setItem('token',resp.token);
-
+            localStorage.setItem('email',this.persona.email);
           }),
           map( resp => true),
           catchError(error => of(false))

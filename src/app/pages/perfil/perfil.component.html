@@ -4,102 +4,87 @@
                   <!-- Column -->
                       <!-- Single Advisor-->
                       <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <!-- Team Thumb-->
-                          <div class="advisor_thumb" style="text-align:center ;"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="315" height="315" alt="">
+                          <div class="advisor_thumb" style="text-align:center ;"><img src="../../../assets/images/users/emilio.jpg" width="330" height="330" style="border-radius: 10px; ;">
                             <!-- Social Info-->
                             <div class="social-info"><a href="#"><i class="fa-solid fa-paw"></i></a></div>
                           </div>
                           <!-- Team Details-->
                           <div class="single_advisor_details_info">
-                            <h6>Camilo Garcia</h6>
-                            <p class="designation">Propietario</p>
+                            <h6 style="color:#fff ;">{{persona.nombre}} {{persona.apellido}}</h6>
+                            <p class="designation" style="color:#fff ;">Propietario</p>
                           </div>
                         </div>
                       </div>
                   <!-- Column -->
                   <div class="col-lg-8 col-xlg-9 col-md-7">
-                      <div class="card">
+                      <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <div class="card-body">
-                              <form class="form-horizontal form-material mx-2">
+                            <h2 style="color: #009efb">Editar Perfil</h2>
+                              <form action="">
+
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label>Nombre</label>
-                                    <input  type="text"
-                                            class="form-control"
-                                            formControlName="nombre">
+                                    <label for="inputEmail4">Nombre</label>
+                                    <input type="email" class="form-control" id="inputEmail4">
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label>Apellido</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           formControlName="apellido">
-
-                                  </div>
-
-                                </div>
-                                <div class="form-row">
-                                  <div class="form-group col-md-6">
-                                    <label>Tipo de documento</label>
-                                    <select class="form-control"
-                                            formControlName="tipoDocumento">
-                                      <option value="" selected>Selecione...</option>
-                                      <option
-
-                                        >
-
-                                      </option>
-                                    </select>
-
-                                  </div>
-                                  <div class="form-group col-md-6">
-                                    <label>Número del documento</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           formControlName="numeroDocumento">
-
+                                    <label for="inputPassword4">Apellido</label>
+                                    <input type="password" class="form-control" id="inputPassword4">
                                   </div>
                                 </div>
+
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label>Celular</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           formControlName="celular">
-
+                                    <label for="inputState">Tipo de documento</label>
+                                    <select id="inputState" class="form-control">
+                                      <option selected>Choose...</option>
+                                      <option>...</option>
+                                    </select>
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label>Tipo de Usuario</label>
-                                    <select class="form-control"
-                                            formControlName="tipoUsuario">
-                                      <option value="" selected>Selecione...</option>
-                                      <option
-                                        >
+                                    <label for="inputCity">Número de documento</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                  </div>
+                                </div>
 
-                                      </option>
+                                <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <label for="inputCity">Número de documento</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="inputState">Tipo de usuario</label>
+                                    <select id="inputState" class="form-control">
+                                      <option selected>Choose...</option>
+                                      <option>...</option>
                                     </select>
+                                  </div>
+                                </div>
 
+                                <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Correo electroníco</label>
+                                    <input type="email" class="form-control" id="inputEmail4">
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Estado</label>
+                                    <input type="email" class="form-control" id="inputEmail4">
                                   </div>
                                 </div>
 
                                 <div class="form-group">
-                                  <label>Correo Electrónico</label>
-                                  <input type="email"
-                                         class="form-control"
-                                         formControlName="email">
-
-                                </div>
-                                <div class="form-group">
-                                  <label>Contraseña</label>
-                                  <input type="password"
-                                         class="form-control"
-                                         formControlName="clave">
-
+                                  <div class="form-group col-md-6">
+                                    <label >Imagen</label>
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                      <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                    </div>
+                                  </div>
                                 </div>
 
-                                <div class="form-group" style="margin-top: 50px;">
-                                  <button type="submit" class="btn btn-block login-btn2">Registrar</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary">Editar</button>
                               </form>
                           </div>
                       </div>
