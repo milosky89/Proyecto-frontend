@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/models/persona.model';
+import { PersonaService } from 'src/app/services/persona.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  public persona:Persona;
+
+  constructor(private personaService: PersonaService) {
+
+    this.persona = personaService.persona;
+  }
 
   ngOnInit(): void {
   }

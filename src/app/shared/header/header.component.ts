@@ -10,10 +10,14 @@ import { Persona } from 'src/app/models/persona.model';
 })
 export class HeaderComponent implements OnInit {
 
-  nombreUsuario:Persona| undefined;
+  public persona:Persona|undefined;
 
   constructor(private personaService: PersonaService,
-              private router: Router) { }
+              private router: Router) {
+
+                this.persona = personaService.persona;
+
+              }
 
 
     ngOnInit(): void {

@@ -3,3 +3,93 @@
 .text-muted-1{
   color: #009efb;
 }
+
+
+//fichas mascotas
+
+.background1-left-column{
+  background: linear-gradient(180deg,#54667a,#637bff);
+}
+
+.background2-left-column{
+  background: linear-gradient(180deg,#6edcc4,#1aab8b);
+}
+
+.contenedor-cards{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-ficha{
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  margin: 1.5rem;
+  overflow: hidden;
+  width: 25rem;
+  height: 9rem;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.card-ficha .h6{
+  opacity: 0.6;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+}
+
+.card-ficha .h2{
+  letter-spacing: 1rem 0;
+  color: #54667a;
+}
+
+.left-column{
+  color: #ffffff;
+  padding: 2rem;
+  max-width: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-column h2{
+  color: #ffffff;
+}
+
+.left-column i{
+  font-size: 5rem;
+}
+
+
+.rigth-column{
+  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  justify-content: space-between;
+
+}
+
+.rigth-column p{
+  font-size: .9rem;
+  color: #54667a;
+}
+
+.button{
+  border-radius: 3rem;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  font-size: 1.2rem;
+  letter-spacing: .1rem;
+  padding: .5rem 1.2rem;
+  border: none;
+}
+
+.rigth-column h2{
+  font-size: 3.9rem;
+
+}
+
