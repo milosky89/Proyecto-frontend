@@ -9,8 +9,10 @@ import { NuevaClaveComponent } from './nueva-clave/nueva-clave.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'olvidoContrasena', component: OlvidoContrasenaComponent},
-  {path: 'nuevaClave', component: NuevaClaveComponent},
+  {path: 'nuevaClave/:token', component: NuevaClaveComponent},
   {path: 'persona', component: PersonaComponent},
+  {path: 'nuevaClave/:token', component: OlvidoContrasenaComponent},
+  {path: 'persona', component: NuevaClaveComponent},
 ];
 
 @NgModule({

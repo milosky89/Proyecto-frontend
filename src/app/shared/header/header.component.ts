@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PersonaService } from '../../services/persona.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -10,15 +10,12 @@ import { Persona } from 'src/app/models/persona.model';
 })
 export class HeaderComponent implements OnInit {
 
-  public persona:Persona|undefined;
+  @Input()
+  public usuario:Persona | undefined;
+
 
   constructor(private personaService: PersonaService,
-              private router: Router) {
-
-                this.persona = personaService.persona;
-
-              }
-
+              private router: Router) {}
 
     ngOnInit(): void {
     }

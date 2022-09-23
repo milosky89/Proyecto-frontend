@@ -24,31 +24,33 @@ export class LoginComponent  {
               private fb: FormBuilder,
               private personaService: PersonaService) { }
 
-  login(){
+              login(){
 
-    this.personaService.login(this.loginForm.value).subscribe({
-      next: (resp) =>{
+                this.personaService.login(this.loginForm.value).subscribe({
+                  next: (resp) =>{
+                    const bandera = true;
+                    const con = JSON.stringify(bandera)
 
-        if( this.loginForm.get('recordarme')?.value){
-          localStorage.setItem('email', this.loginForm.get('email')?.value)
-        }else{
-          localStorage.removeItem('email')
-        }
-        Swal.fire({
-          icon: 'success',
-          title: 'Bienvenido a Medellín Mascotas',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        //Navegar al dashboard
-        this.router.navigateByUrl('/');
-        //console.log('Usuario autenticado'),
-        //console.log(resp);
-      },
-      error: (err) => {
-        Swal.fire('Error',err.error.msg, 'error');
-        }})
-    }
+                    if( this.loginForm.get('recordarme')?.value){
+                      localStorage.setItem('email', this.loginForm.get('email')?.value)
+                      localStorage.setItem('bandera',con)
+                    }else{
+                      localStorage.removeItem('email')
+                    }
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Bienvenido a Medellín Mascotas',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                    //Navegar al dashboard
+                    this.router.navigateByUrl('/');
+                  },
+                  error: (err) => {
+                    Swal.fire('Error',err.error.msg, 'error');
+                    }})
+                }
 
-  }
+              }
+
 

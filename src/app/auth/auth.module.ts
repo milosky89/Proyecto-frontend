@@ -15,7 +15,7 @@ import { NuevaClaveComponent } from './nueva-clave/nueva-clave.component'
     LoginComponent,
     PersonaComponent,
     OlvidoContrasenaComponent,
-    NuevaClaveComponent,
+    NuevaClaveComponent
   ],
   exports:[
     LoginComponent,
