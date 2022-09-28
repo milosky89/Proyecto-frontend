@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordService } from '../../services/password/password.service';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class NuevaClaveComponent implements OnInit {
   token: string;
 
   constructor(public passwordService: PasswordService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     this.forma = new FormGroup({
       'password': new FormControl()
     });
@@ -35,8 +37,20 @@ export class NuevaClaveComponent implements OnInit {
     let password = this.forma.value.password;
     let token = this.token;
     this.passwordService.reestablecerContrasena(password, token)
-      .subscribe((resp: any) => resp);
-
-  }
-}
+      .subscribe({
+        next:(resp: any) =>{
+          resp
+          Swal.fire({
+            icon: 'success',
+            title: 'Cambio de contraseña exitoso',
+            showConfirmButton: false,
+            timer: 3000
+          })
+          this.router.navigateByUrl('/login');
+        },
+        error: (err) => {
+          Swal.fire('Error',err.error.msg, 'error');
+          }})
+      }
+    }
 
