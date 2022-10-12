@@ -9,6 +9,7 @@ import { MascotaComponent } from './mascota/mascota.component';
 import { AnalisisComponent } from './analisis/analisis.component';
 import { InformacionComponent } from './informacion/informacion.component';
 import { NgChartsModule } from 'ng2-charts';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,6 +30,8 @@ import { NgChartsModule } from 'ng2-charts';
     SharedModule,
     RouterModule,
     NgChartsModule,
+    ReactiveFormsModule,
+    FormsModule
 ]
 })
 export class PagesModule { }

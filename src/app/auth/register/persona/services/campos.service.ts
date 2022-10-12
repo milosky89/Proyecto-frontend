@@ -43,6 +43,10 @@ export class CamposService{
     return[...this._comunas];
   }
 
+  private _estadoUsuarios: string[] = ['Activo','Inactivo'];
 
+  get estadosUsuario(): string[]{
+    return[...this._estadoUsuarios];
+  }
 
 }

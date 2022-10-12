@@ -1,3 +1,6 @@
+import { environment } from '../../environments/environment';
+
+const base_url = environment.base_url;
 
 export class Persona {
 
@@ -17,5 +20,13 @@ export class Persona {
       public estado?:string,
       ){}
 
+      get imagenUrl() {
+        // /upload/personas/no-image
+        if(this.img){
+          return `${base_url}/upload/personas/${this.img}`;
+        }else{
+          return `${base_url}/upload/personas/no-image`;
+        }
 
+      }
 }

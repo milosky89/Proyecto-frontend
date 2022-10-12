@@ -6,7 +6,7 @@
                       <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <!-- Team Thumb-->
-                          <div class="advisor_thumb" style="text-align:center ;"><img src="../../../assets/images/users/emilio.jpg" width="330" height="330" style="border-radius: 10px; ;">
+                          <div class="advisor_thumb" style="text-align:center ;"><img [src]="imgUrl" width="330" height="330" style="border-radius: 10px; ;">
                             <!-- Social Info-->
                             <div class="social-info"><a href="#"><i class="fa-solid fa-paw"></i></a></div>
                           </div>
@@ -16,71 +16,134 @@
                             <p class="designation" style="color:#fff ;">Propietario</p>
                           </div>
                         </div>
+
+                        <div class="col-12">
+                          <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
+                            <div class="card-body">
+                              <h4 style="color: #009efb">Imagen</h4>
+                              <img src="" alt="">
+                              <input type="file">
+                              <br>
+                              <br>
+                              <button type="button2" class="btn btn-outline-primary btn-block "><i class="fa-solid fa-image"></i> Cargar imagen</button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
+
                   <!-- Column -->
                   <div class="col-lg-8 col-xlg-9 col-md-7">
                       <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <div class="card-body">
                             <h2 style="color: #009efb">Editar Perfil</h2>
-                              <form action="">
+                              <form [formGroup]="perfilForm">
 
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Nombre</label>
-                                    <input type="email" class="form-control" id="inputEmail4">
+                                    <label>Nombre</label>
+                                    <input  type="text"
+                                            class="form-control"
+                                            formControlName="nombre"
+                                            [(ngModel)]="persona.nombre">
+                                            <p class="col text-danger" *ngIf="campoNoValido('nombre')" >* El nombre es obligatorio</p>
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label for="inputPassword4">Apellido</label>
-                                    <input type="password" class="form-control" id="inputPassword4">
+                                    <label>Apellido</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           formControlName="apellido"
+                                           [(ngModel)]="persona.apellido">
+                                           <p class="col text-danger" *ngIf="campoNoValido('apellido')" >* El apellido es obligatorio</p>
                                   </div>
                                 </div>
 
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label for="inputState">Tipo de documento</label>
-                                    <select id="inputState" class="form-control">
-                                      <option selected>Choose...</option>
-                                      <option>...</option>
+                                    <label>Tipo de documento</label>
+                                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"
+                                            formControlName="tipoDocumento"
+                                            [(ngModel)]="persona.tipoDocumento" >
+                                      <option value="" selected></option>
+                                      <option
+                                        *ngFor="let tipoDocumento of tipoDocumentos"
+                                        [value]="tipoDocumento">
+                                        {{tipoDocumento}}
+                                      </option>
                                     </select>
+                                    <p class="col text-danger" *ngIf="campoNoValido('tipoDocumento')" >* El tipo de documento es obligatorio</p>
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label for="inputCity">Número de documento</label>
-                                    <input type="text" class="form-control" id="inputCity">
+                                    <label>Número del documento</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           formControlName="numeroDocumento"
+                                           [(ngModel)]="persona.numeroDocumento">
+                                           <p class="col text-danger" *ngIf="campoNoValido('numeroDocumento')" >* El número de documento es obligatorio</p>
                                   </div>
                                 </div>
 
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label for="inputCity">Número de documento</label>
-                                    <input type="text" class="form-control" id="inputCity">
+                                    <label>Celular</label>
+                                    <input type="text"
+                                          class="form-control"
+                                          formControlName="celular"
+                                          [(ngModel)]="persona.celular">
+                                          <p class="col text-danger" *ngIf="campoNoValido('celular')" >* El número de celular es obligatorio</p>
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label for="inputState">Tipo de usuario</label>
-                                    <select id="inputState" class="form-control">
-                                      <option selected>Choose...</option>
-                                      <option>...</option>
+                                    <label>Tipo de Usuario</label>
+                                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"
+                                            formControlName="tipoUsuario"
+                                            [(ngModel)]="persona.tipoUsuario" >
+                                      <option value="" selected></option>
+                                      <option
+                                        *ngFor="let tipoUsuario of tipoUsuarios"
+                                        [value]="tipoUsuario">
+                                        {{tipoUsuario}}
+                                      </option>
                                     </select>
+                                    <p class="col text-danger" *ngIf="campoNoValido('tipoUsuario')" >* El tipo de usuario es obligatorio</p>
                                   </div>
                                 </div>
 
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Correo electroníco</label>
-                                    <input type="email" class="form-control" id="inputEmail4">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email"
+                                           class="form-control"
+                                           formControlName="email"
+                                           [(ngModel)]="persona.email">
+                                           <p class="col text-danger" *ngIf="campoNoValido('email')" >* El correo electrónico es obligatorio</p>
                                   </div>
                                   <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Estado</label>
-                                    <input type="email" class="form-control" id="inputEmail4">
+                                    <label>Estado</label>
+                                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"
+                                            formControlName="estado"
+                                            [(ngModel)]="persona.estado">
+                                      <option value="" selected>
+                                      </option>
+                                      <option
+                                        *ngFor="let estadoUsuario of estadoUsuarios"
+                                        [value]="estadoUsuario">
+                                        {{estadoUsuario}}
+                                      </option>
+                                    </select>
+                                    <p class="col text-danger" *ngIf="campoNoValido('estadoUsuario')" >* El tipo de usuario es obligatorio</p>
                                   </div>
                                 </div>
 
-                                <div class="form-group">
-                                  <label >Imagen</label>
+                                <div class="form-row">
                                   <div class="form-group col-md-6">
-                                      <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                                      <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                    <label>Rol de usuario</label>
+                                    <input  type="text"
+                                           class="form-control"
+                                           formControlName="role"
+                                           [(ngModel)]="persona.role" >
+                                           <p class="col text-danger" *ngIf="campoNoValido('role')" >* El rol es obligatorio</p>
                                   </div>
                                 </div>
+                                <br>
                                 <div style="display: flex;justify-content: center;">
                                   <button type="submit" class="btn btn-outline-primary btn-lg mr-2">
                                     <i class="fa-sharp fa-solid fa-user-pen"></i> Editar</button>
@@ -107,7 +170,7 @@
                       <h4>Mascotas Registradas</h4>
                     </div>
                     <h2> 3</h2>
-                    <button class="button background2-left-column" type="submit">Ver mas</button>
+
                   </div>
                 </div>
 
@@ -122,7 +185,7 @@
                       <h4>Mascotas Registradas</h4>
                     </div>
                     <h2> 1</h2>
-                    <button class="button background1-left-column" type="submit">Ver mas</button>
+
                   </div>
                 </div>
 

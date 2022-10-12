@@ -64,7 +64,7 @@
                   <!-- Column -->
                   <div class="col d-flex align-items-center">
                     <div>
-                      <h1 class="fw-light">20</h1>
+                      <h1 class="fw-light">{{mascotas1}}</h1>
                       <h6 class="text-muted-1 mb-0 fw-normal">
                         Perros
                       </h6>
@@ -89,7 +89,7 @@
                 <!-- Column -->
                 <div class="col d-flex align-items-center">
                   <div>
-                    <h1 class="fw-light">15</h1>
+                    <h1 class="fw-light">{{mascotas2}}</h1>
                     <h6 class="text-muted-1 mb-0 fw-normal">
                       Gatos
                     </h6>
@@ -108,12 +108,14 @@
     </div>
   </div>
 
-
+  <br>
+  <br>
   <!-- ============================================================== -->
   <!-- Sales chart -->
   <!-- ============================================================== -->
   <div class="row">
       <!-- column -->
+     <!--
       <div class="col-6">
           <div class="card"  style="border-radius:1rem;  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
               <div class="card-body">
@@ -127,19 +129,19 @@
                 </canvas>
               </div>
           </div>
-      </div>
+      </div>-->
       <!-- column -->
 
         <!-- column -->
-        <div class="col-6">
+        <div class="col-12">
           <div class="card" style="border-radius:1rem;  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
               <div class="card-body">
                   <h4 class="card-title">Mascotas</h4>
-                  <canvas baseChart class="flot-base w-100" height="500"
+                  <canvas baseChart class="flot-base w-100" height="480"
                   [data]="barChartData2"
-                  [options]="barChartOptions2"
-                  [plugins]="barChartPlugins2"
-                  [type]="barChartType2">
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [type]="barChartType"
                   >
                 </canvas>
               </div>

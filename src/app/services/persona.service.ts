@@ -40,7 +40,7 @@ export class PersonaService {
             'x-token': token,
           }
       }).pipe(
-          tap((resp: any)=>{
+          map((resp: any)=>{
 
             const {nombre,apellido,tipoDocumento,numeroDocumento,celular,tipoUsuario,email,role,estado,uid,img
                   } = resp.persona;
@@ -48,8 +48,9 @@ export class PersonaService {
             this.persona = new Persona(nombre,apellido,tipoDocumento,numeroDocumento,tipoUsuario,celular,email,'',uid,img,role,estado);
             localStorage.setItem('token',resp.token);
             localStorage.setItem('email',this.persona.email);
+            return true;
           }),
-          map( resp => true),
+
           catchError(error => of(false))
         )
   }

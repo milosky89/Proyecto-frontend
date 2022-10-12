@@ -13,9 +13,13 @@ export class HeaderComponent implements OnInit {
   @Input()
   public usuario:Persona | undefined;
 
+  public imgUrl = '';
 
   constructor(private personaService: PersonaService,
-              private router: Router) {}
+              private router: Router) {
+
+                this.imgUrl = personaService.persona.imagenUrl;
+              }
 
     ngOnInit(): void {
     }

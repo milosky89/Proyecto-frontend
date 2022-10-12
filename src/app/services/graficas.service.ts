@@ -18,6 +18,9 @@ export class GraficasService {
     return this.http.get(`${base_url}/personas/tipoUsuario/usuarios`);
   }
 
+  contadorMascotas(){
+    return this.http.get(`${base_url}/mascotas/especie`);
+  }
 
 
   getUsuarios(){
@@ -31,5 +34,15 @@ export class GraficasService {
                 );
   }
 
+  getMascotas(){
+    return this.contadorMascotas()
+    .pipe(
+        map(data => {
+          const labels = Object.keys(data)
+          const values = Object.values(data);
+          return { labels,values};
+        })
+      );
+  }
 
 }
