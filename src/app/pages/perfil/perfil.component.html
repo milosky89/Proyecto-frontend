@@ -6,7 +6,9 @@
                       <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <!-- Team Thumb-->
-                          <div class="advisor_thumb" style="text-align:center ;"><img [src]="imgUrl" width="330" height="330" style="border-radius: 10px; ;">
+                          <div class="advisor_thumb" style="text-align:center ;">
+                            <img *ngIf="!imgTemp" [src]="imgUrl" width="330" height="330" style="border-radius: 10px; ;">
+                           <img *ngIf="imgTemp" [src]="imgTemp" width="330" height="330" style="border-radius: 10px; ;">
                             <!-- Social Info-->
                             <div class="social-info"><a href="#"><i class="fa-solid fa-paw"></i></a></div>
                           </div>
@@ -22,10 +24,14 @@
                             <div class="card-body">
                               <h4 style="color: #009efb">Imagen</h4>
                               <img src="" alt="">
-                              <input type="file">
+                              <input type="file"
+                                      (change)="cambiarImagen($event)">
                               <br>
                               <br>
-                              <button type="button2" class="btn btn-outline-primary btn-block "><i class="fa-solid fa-image"></i> Cargar imagen</button>
+                              <button type="button2"
+                               class="btn btn-outline-primary btn-block "
+                               [disabled]="!imagenSubir"
+                               (click)="subirImagen()"><i class="fa-solid fa-image"></i> Cargar imagen</button>
                             </div>
                           </div>
                         </div>
@@ -36,7 +42,8 @@
                       <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <div class="card-body">
                             <h2 style="color: #009efb">Editar Perfil</h2>
-                              <form [formGroup]="perfilForm">
+                              <form [formGroup]="perfilForm"
+                                    (ngSubmit)="actualizarPerfil()">
 
                                 <div class="form-row">
                                   <div class="form-group col-md-6">
@@ -142,6 +149,7 @@
                                            [(ngModel)]="persona.role" >
                                            <p class="col text-danger" *ngIf="campoNoValido('role')" >* El rol es obligatorio</p>
                                   </div>
+
                                 </div>
                                 <br>
                                 <div style="display: flex;justify-content: center;">
@@ -170,7 +178,6 @@
                       <h4>Mascotas Registradas</h4>
                     </div>
                     <h2> 3</h2>
-
                   </div>
                 </div>
 
@@ -188,9 +195,4 @@
 
                   </div>
                 </div>
-
-
-
-
-
               </div>

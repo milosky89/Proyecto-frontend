@@ -1,8 +1,12 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CamposService } from 'src/app/auth/register/persona/services/campos.service';
 import { Persona } from 'src/app/models/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
+import { PerfilForm } from '../../interface/mi-perfil.interface';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
   selector: 'app-perfil',
@@ -20,10 +24,13 @@ export class PerfilComponent implements OnInit {
 
   public perfilForm: FormGroup;
   public fomrSubmitted = false;
+  public imagenSubir: File;
+  public imgTemp: string | ArrayBuffer;
 
   constructor(private personaService: PersonaService,
               private camposService:CamposService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private fileUploadService: FileUploadService) {
 
     this.persona = personaService.persona;
     this.imgUrl = personaService.persona.imagenUrl;
@@ -38,17 +45,16 @@ export class PerfilComponent implements OnInit {
     this.estadoUsuarios = this.camposService.estadosUsuario;
 
 
-
      this.perfilForm = this.fb.group({
         nombre: ['', Validators.required, ],
         apellido: ['',Validators.required],
         tipoDocumento: ['',Validators.required],
         numeroDocumento: ['',[Validators.required, Validators.minLength(3)]],
-        tipoUsuario: [{value: '', disabled: true},Validators.required],
+        tipoUsuario: [{value: '', disabled: true},],
         celular: ['',Validators.required],
         email: ['',[Validators.required, Validators.minLength(3),Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-        clave:['',[Validators.required, Validators.minLength(5),Validators.maxLength(8)]],
-        estado: ['', Validators.required,],
+        clave:[{value: '', disabled: true},],
+        estado: [{value: '', disabled: true},],
         role: [{value: '', disabled: true}, Validators.required, ],
       });
 
@@ -66,6 +72,42 @@ export class PerfilComponent implements OnInit {
 
   actualizarPerfil(){
 
+    console.log(this.perfilForm.value);
+    this.personaService.actualizarPerfil(this.perfilForm.value)
+        .subscribe({next: (resp) =>{
+          const { nombre,apellido} = this.perfilForm.value;
+          this.persona.nombre = nombre;
+          this.persona.apellido = apellido;
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Usuario modificado exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          window.location.reload();
+        },
+        error: (err) => {
+          Swal.fire('Error',err.error.msg, 'error');
+          }})
+
+  }
+
+  cambiarImagen(event){
+    this.imagenSubir = event.target.files[0];
+    console.log(event);
+
+    if(!this.imagenSubir){
+      return this.imgTemp = null;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(this.imagenSubir);
+    reader.onloadend = () => {
+      this.imgTemp = reader.result;
+    }
+
+
+
   }
 
 
@@ -78,6 +120,16 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-
+  subirImagen(){
+    this.fileUploadService.actualizarFoto(this.imagenSubir,'personas', this.persona.uid)
+                          .then(img => this.persona.img = img),
+                            Swal.fire({
+                              icon: 'success',
+                              title: 'Imagen cargada exitosamente',
+                              showConfirmButton: false,
+                              timer: 1500
+                            });
+                            window.location.reload();
+  }
 
 }

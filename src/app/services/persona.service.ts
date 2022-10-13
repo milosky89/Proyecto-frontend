@@ -6,6 +6,7 @@ import { LoginForm } from '../interface/login-form.interface';
 import {catchError, tap} from 'rxjs/operators'
 import { map, Observable, of } from 'rxjs';
 import { Persona } from '../models/persona.model';
+import { PerfilForm } from '../interface/mi-perfil.interface';
 
 
 const base_url = environment.base_url;
@@ -18,6 +19,16 @@ export class PersonaService {
   public persona: Persona | undefined;
 
   constructor(private http: HttpClient) { }
+
+
+  get token():string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid(): string {
+    return this.persona.uid || '';
+  }
+
 
   logout(){
     const bandera = localStorage.getItem('bandera')
@@ -34,10 +45,10 @@ export class PersonaService {
   }
 
   validarToken(): Observable<boolean>{
-      const token = localStorage.getItem('token') || '';
+
      return this.http.get(`${base_url}/login/renew`,{
           headers:{
-            'x-token': token,
+            'x-token': this.token,
           }
       }).pipe(
           map((resp: any)=>{
@@ -63,7 +74,27 @@ export class PersonaService {
                   localStorage.setItem('token',resp.token)
                 })
               )
-}
+  }
+
+  actualizarPerfil(formData: PerfilForm){
+
+    formData = {
+      ...formData,
+      role: this.persona.role,
+      clave: this.persona.clave,
+      tipoUsuario: this.persona.tipoUsuario
+
+    }
+
+    return this.http.put(`${base_url}/personas/${this.uid}`, formData,{
+      headers:{
+        'x-token': this.token,
+      }
+    })
+
+  }
+
+
 
   login(formData: LoginForm){
 
