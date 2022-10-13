@@ -17,6 +17,8 @@ const base_url = environment.base_url;
 export class PersonaService {
 
   public persona: Persona | undefined;
+  public perro: any;
+  public gato: any;
 
   constructor(private http: HttpClient) { }
 
@@ -115,5 +117,23 @@ export class PersonaService {
       }
     });
   }
+
+  mascotasPersonas(){
+    return this.http.get(`${base_url}/mascotas/count/${this.uid}`);
+  }
+
+  getMascotasPersonas(){
+    return this.mascotasPersonas()
+              .pipe(
+                map(data => {
+                  const values = Object.values(data);
+                  return {values};
+                })
+                )
+
+  }
+
 }
+
+
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from '../../models/persona.model';
+import { PersonaService } from '../../services/persona.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public persona : Persona;
+
+  constructor(private personaService: PersonaService) {
+
+    this.persona = personaService.persona;
+    console.log(this.persona.role);
+
+  }
 
   ngOnInit(): void {
   }

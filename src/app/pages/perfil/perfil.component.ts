@@ -27,6 +27,9 @@ export class PerfilComponent implements OnInit {
   public imagenSubir: File;
   public imgTemp: string | ArrayBuffer;
 
+  public perro: any;
+  public gato: any;
+
   constructor(private personaService: PersonaService,
               private camposService:CamposService,
               private fb: FormBuilder,
@@ -43,6 +46,7 @@ export class PerfilComponent implements OnInit {
     this.tipoDocumentos = this.camposService.tipoDocumentos;
     this.tipoUsuarios = this.camposService.tipoUsuarios;
     this.estadoUsuarios = this.camposService.estadosUsuario;
+    this.contadorMascotas();
 
 
      this.perfilForm = this.fb.group({
@@ -130,6 +134,17 @@ export class PerfilComponent implements OnInit {
                               timer: 1500
                             });
                             window.location.reload();
+  }
+
+  public contadorMascotas(){
+    this.personaService.getMascotasPersonas()
+        .subscribe(({values})=>{
+
+          this.perro = values[0];
+          this.gato = values[1]
+        })
+
+
   }
 
 }

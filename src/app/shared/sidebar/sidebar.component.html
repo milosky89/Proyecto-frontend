@@ -34,7 +34,8 @@
                           aria-hidden="true"></i><span class="hide-menu">Consulta mascotas</span></a></li>
 
               <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                routerLinkActive="active" [routerLink]="['/analisis']" aria-expanded="false"><i class="me-3 fas fa-chart-bar"
+                routerLinkActive="active" [routerLink]="['/analisis']" aria-expanded="false"
+                *ngIf="persona.role == 'EMPRESA_ROLE'"><i class="me-3 fas fa-chart-bar"
                           aria-hidden="true"></i><span class="hide-menu">Analisis Grafico</span></a></li>
           </ul>
 
