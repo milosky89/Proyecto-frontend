@@ -15,6 +15,55 @@ export class CamposService{
     return[...this._tipoUsuarios];
   }
 
+  private _especie: string[] = ['Perro','Gato'];
+
+  get especie(): string[]{
+    return[...this._especie];
+  }
+
+  private _caracteristica: string[] = ['Criollo','Raza'];
+
+  get caracteristica(): string[]{
+    return[...this._caracteristica];
+  }
+
+  private _sexo: string[] = ['Macho','Hembra'];
+
+  get sexo(): string[]{
+    return[...this._sexo];
+  }
+
+  private _pregunta: string[] = ['Si','No'];
+
+  get pregunta(): string[]{
+    return[...this._pregunta];
+  }
+
+  private _estado: string[] = ['Vivo','Muerto','Perdido','En Adopción'];
+
+  get estado(): string[]{
+    return[...this._estado];
+  }
+
+  private _adquisicion: string[] = ['Compra','Adopción'];
+
+  get adquisicion(): string[]{
+    return[...this._adquisicion];
+  }
+
+  private _habita: string[] = ['Casa','Finca','Apartamento'];
+
+  get habita(): string[]{
+    return[...this._habita];
+  }
+
+
+  private _alimentacion: string[] = ['Casero','Concentrado']
+
+  get alimentacion(): string[]{
+    return[...this._alimentacion];
+  }
+
   private _comunas: string[] = [
     'Comuna 1 - Popular',
     'Comuna 2 - Santa Cruz',

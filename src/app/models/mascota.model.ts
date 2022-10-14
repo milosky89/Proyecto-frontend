@@ -20,7 +20,7 @@ constructor(
       public raza:string,
       public sexo:string,
       public microChip:string,
-      public fechaNacimiento:  string,
+      public edad:  number,
       public vacunacion:  string,
       public direccion:string,
       public comuna: string,
