@@ -7,6 +7,8 @@ import {catchError, tap} from 'rxjs/operators'
 import { map, Observable, of } from 'rxjs';
 import { Persona } from '../models/persona.model';
 import { PerfilForm } from '../interface/mi-perfil.interface';
+import { CargarMascotas } from '../interface/cargar-mascotas.interface';
+import Swal from 'sweetalert2';
 
 
 const base_url = environment.base_url;
@@ -29,6 +31,14 @@ export class PersonaService {
 
   get uid(): string {
     return this.persona.uid || '';
+  }
+
+  get headers() {
+    return {
+      headers:{
+        'x-token': this.token,
+      }
+    }
   }
 
 
@@ -133,7 +143,21 @@ export class PersonaService {
 
   }
 
+
+  cargarMascotas(desde: number= 0){
+
+    const url = `${base_url}/mascotas?desde=${desde}`;
+    return this.http.get<CargarMascotas>(url, this.headers)
+  }
+
+  eliminarUsuario(persona:Persona){
+
+    //http://localhost:3000/api/personas/630fc084dff8bee6e9526923
+    const url = `${base_url}/personas/${persona.uid}`;
+    return this.http.delete(url, this.headers)
+
+
+  }
+
 }
-
-
 

@@ -33,7 +33,8 @@ export class PerfilComponent implements OnInit {
   constructor(private personaService: PersonaService,
               private camposService:CamposService,
               private fb: FormBuilder,
-              private fileUploadService: FileUploadService) {
+              private fileUploadService: FileUploadService,
+              private router: Router) {
 
     this.persona = personaService.persona;
     this.imgUrl = personaService.persona.imagenUrl;
@@ -85,7 +86,7 @@ export class PerfilComponent implements OnInit {
 
           Swal.fire({
             icon: 'success',
-            title: 'Usuario modificado exitosamente',
+            title: 'Usuario modificado exitosamente¡¡',
             showConfirmButton: false,
             timer: 1500
           })
@@ -109,10 +110,8 @@ export class PerfilComponent implements OnInit {
     reader.onloadend = () => {
       this.imgTemp = reader.result;
     }
-
-
-
   }
+
 
 
   campoNoValido(campo:string): boolean{
@@ -146,5 +145,41 @@ export class PerfilComponent implements OnInit {
 
 
   }
+
+  eliminarUsuario(persona:Persona){
+
+    Swal.fire({
+      title: '¿Eliminar Usuario?',
+      text: `Estas a punto de eliminar a ${persona.nombre} ${persona.apellido}`,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'No, cancelar',
+      confirmButtonText: 'Si, eliminarlo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.personaService.eliminarUsuario(persona).subscribe({
+          next:(resp) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Usuario eliminado correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            //Navegar al dashboard
+            this.personaService.logout();
+            this.router.navigateByUrl('/login');
+
+
+          },error: (err) => {
+            Swal.fire('Error',err.error.msg, 'error');
+            }
+        })
+      }
+    })
+  }
+
+
+
 
 }
