@@ -2,40 +2,9 @@
                 <div class="row ">
                   <!-- Column -->
                       <!-- Single Advisor-->
-                      <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
-                          <!-- Team Thumb-->
-                          <div class="advisor_thumb" style="text-align:center ;"><img src="../../../assets/login/images/cachorro.jpg" width="330" height="330" style="border-radius: 10px; ;">
-                            <!-- Social Info-->
-                            <div class="social-info"><a href="#"><i class="fa-solid fa-paw"></i></a></div>
-                          </div>
-                          <!-- Team Details-->
-                          <div class="single_advisor_details_info">
-                            <h6 style="color:#fff ;">Mascota</h6>
-                          </div>
-                        </div>
 
-                        <div class="col-12">
-                          <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
-                            <div class="card-body">
-
-                              <img src="" alt="">
-                              <input type="file"
-                                      >
-                              <br>
-                              <br>
-                              <button type="button2"
-                               class="btn btn-outline-primary btn-block "
-
-                              ><i class="fa-solid fa-image"></i> Cargar imagen</button>
-
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                   <!-- Column -->
-                  <div class="col-lg-8 col-xlg-9 col-md-7">
+                  <div class="col-lg-12 col-xlg-9 col-md-7">
                       <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
                           <div class="card-body">
                             <h2 style="color: #009efb">Registrar Mascota</h2>
@@ -254,7 +223,7 @@
                                   <tr >
                                     <th class="campos">Nombre mascota</th>
                                     <th class="campos">Especie</th>
-                                    <th class="campos">Raza</th>
+                                    <th class="campos">Caracteristicas</th>
                                     <th class="campos">Sexo</th>
                                     <th class="campos">Comuna</th>
                                     <th class="campos">Adquisición</th>
@@ -263,36 +232,33 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr style="text-align: center;">
+                                  <tr  *ngFor="let mascota of mascotas">
                                     <td>
-                                      <div style="text-align: center;">
-                                        <img src="../../../assets/login/images/cachorro.jpg" class="rounded-circle" width="40">
-                                        <span class="ms-3 fw-normal" >Apolo</span>
+                                      <div>
+                                        <img src="../../../assets/images/mascota.png" class="rounded-circle" width="40">
+                                        <span class="ms-3 fw-normal" >{{mascota.nombreMascota}}</span>
                                       </div>
                                     </td>
                                     <td>
-                                      <span class="ms-3 fw-normal">Perro</span>
+                                      <span class="ms-3 fw-normal">{{mascota.especie}}</span>
                                     </td>
                                     <td>
-                                      <span class="ms-3 fw-normal">Samoyedo</span>
+                                      <span class="ms-3 fw-normal">{{mascota.caracteristica}}</span>
                                     </td>
                                     <td>
-                                      <span class="ms-3 fw-normal">Macho</span>
+                                      <span class="ms-3 fw-normal">{{mascota.sexo}}</span>
                                     </td>
                                     <td>
-                                      <span class="ms-3 fw-normal">Comuna 10 - la candelaria</span>
+                                      <span class="ms-3 fw-normal">{{mascota.comuna}}</span>
                                     </td>
                                     <td>
-                                      <span class="ms-3 fw-normal">Compra</span>
+                                      <span class="ms-3 fw-normal">{{mascota.adquisicion}}</span>
                                     </td>
                                     <td>
-                                      <span class="badge bg-success py-1">Vivo</span>
+                                      <span class="badge bg-success py-1">{{mascota.estado}}</span>
                                     </td>
                                     <td>
                                       <div>
-                                        <button type="button" class="btn btn-secondary" style="margin-right: 10px;" >
-                                          <i class="fa-solid fa-pen-to-square"></i><span> Editar</span>
-                                        </button>
                                         <button type="button" class="btn btn-info">
                                           <i class="fa-solid fa-eye"></i><span> Detalle</span>
                                         </button>

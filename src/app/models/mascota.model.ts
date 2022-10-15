@@ -36,13 +36,15 @@ constructor(
   get imagenMascotaUrl() {
     // /upload/personas/no-image
 
-    if(!this.img){
-      return  `${base_url}/upload/mascotas/no-image`;
-    }else if(this.img){
+    /*
+    if(this.img){
       return `${base_url}/upload/mascotas/${this.img}`;
     }else{
       return `${base_url}/upload/mascotas/no-image`;
     }
+*/
+
+    return this.img = `${base_url}/upload/mascotas/no-image`;
 
   }
 

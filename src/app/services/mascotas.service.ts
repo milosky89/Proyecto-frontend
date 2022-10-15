@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { CargarMascotas } from '../interface/cargar-mascotas.interface';
 import { map, tap } from 'rxjs';
 import { mascotaForm } from '../interface/registro-mascota.interface';
+import { Mascota } from '../models/mascota.model';
+import { Persona } from '../models/persona.model';
 
 
 const base_url = environment.base_url;
@@ -13,7 +15,13 @@ const base_url = environment.base_url;
 })
 export class MascotasService {
 
-  constructor(private http: HttpClient) { }
+  public mascota :Mascota;
+  public persona: Persona;
+
+  constructor(private http: HttpClient) {
+
+
+  }
 
   get token():string {
     return localStorage.getItem('token') || '';
@@ -45,6 +53,16 @@ export class MascotasService {
 
   }
 
+  cargarMascotas(id: string){
+
+    const url = `${base_url}/mascotas/registro/${id}`
+    return this.http.get<CargarMascotas>(url, this.headers)
+
+
+
+
+
+  }
+
 
 }
-
