@@ -62,6 +62,8 @@ export class PersonaComponent implements OnInit {
       },
       error: (err) => {
         Swal.fire('Error',err.error.msg, 'error');
+        console.log(err);
+
         }})
     }
 

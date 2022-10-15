@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CargarMascotas } from '../interface/cargar-mascotas.interface';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
+import { mascotaForm } from '../interface/registro-mascota.interface';
 
 
 const base_url = environment.base_url;
@@ -34,6 +35,13 @@ export class MascotasService {
               .pipe(
                   map( (resp : any) => resp.resultados)
                 )
+
+  }
+
+  crearMascota(formData: mascotaForm){
+
+    const url =  `${base_url}/mascotas `
+    return this.http.post(url, formData , this.headers)
 
   }
 

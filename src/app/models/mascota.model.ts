@@ -17,7 +17,7 @@ constructor(
       public _id: string,
       public nombreMascota: string,
       public especie:string,
-      public raza:string,
+      public caracteristica:string,
       public sexo:string,
       public microChip:string,
       public edad:  number,

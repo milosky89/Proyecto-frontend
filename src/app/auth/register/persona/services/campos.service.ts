@@ -58,7 +58,7 @@ export class CamposService{
   }
 
 
-  private _alimentacion: string[] = ['Casero','Concentrado']
+  private _alimentacion: string[] = ['Casero','Concentrado','Mixto']
 
   get alimentacion(): string[]{
     return[...this._alimentacion];
