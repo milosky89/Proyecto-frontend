@@ -16,7 +16,8 @@
                                     <label for="inputEmail4">Nombre Mascota</label>
                                     <input type="text"
                                            class="form-control"
-                                          formControlName="nombreMascota">
+                                          formControlName="nombreMascota"
+                                          >
                                           <p class="col text-danger" *ngIf="campoNoValido('nombreMascota')" >* Campo obligatorio</p>
                                   </div>
                                   <div class="form-group col-md-4">
@@ -254,12 +255,18 @@
                                     <td>
                                       <span class="ms-3 fw-normal">{{mascota.adquisicion}}</span>
                                     </td>
-                                    <td>
-                                      <span class="badge bg-success py-1">{{mascota.estado}}</span>
+                                    <td style="text-align:center ;">
+                                      <span *ngIf="mascota.estado == 'Vivo'" class="badge bg-success py-1">{{mascota.estado}}</span>
+                                      <span *ngIf="mascota.estado == 'Muerto'" class="badge bg-primary py-1">{{mascota.estado}}</span>
+                                      <span *ngIf="mascota.estado == 'Perdido'" class="badge bg-danger py-1">{{mascota.estado}}</span>
+                                      <span *ngIf="mascota.estado == 'En adopción'" class="badge bg-warning py-1">{{mascota.estado}}</span>
+
                                     </td>
                                     <td>
-                                      <div>
-                                        <button type="button" class="btn btn-info">
+                                      <div style="text-align:center ;">
+                                        <button type="button"
+                                                class="btn btn-info"
+                                                (click)="editarMascota(mascota)"  >
                                           <i class="fa-solid fa-eye"></i><span> Detalle</span>
                                         </button>
 
@@ -274,3 +281,4 @@
                     </div>
                 </div>
             </div>
+            <app-modal></app-modal>

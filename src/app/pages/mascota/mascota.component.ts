@@ -1,3 +1,4 @@
+import { ModalService } from './../../services/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CamposService } from 'src/app/auth/register/persona/services/campos.service';
@@ -36,17 +37,18 @@ export class MascotaComponent implements OnInit {
   public cargando: boolean = true;
   public persona: Persona;
   public id: string;
+  public idMas: string;
   public mascotas: Mascota[] = [];
-
-
-
 
 
   constructor(private camposService: CamposService,
     private masctoService: MascotasService,
     private fb: FormBuilder,
     private fileUploadService: FileUploadService,
-    private personaService: PersonaService) {
+    private personaService: PersonaService,
+    public modalService: ModalService) {
+
+
     this.id = personaService.persona.uid
 
   }
@@ -171,6 +173,19 @@ export class MascotaComponent implements OnInit {
       });
     window.location.reload();
   }
+
+  editarMascota( mascota:Mascota){
+
+    this.modalService.abrirModal();
+    console.log(this.id);
+    this.modalService.consultarMascota(mascota._id).subscribe( resp => {
+        this.mascota = resp.mascota;
+        console.log(this.mascota);
+
+    })
+  }
+
+
 
 
 }

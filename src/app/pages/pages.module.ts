@@ -10,6 +10,7 @@ import { AnalisisComponent } from './analisis/analisis.component';
 import { InformacionComponent } from './informacion/informacion.component';
 import { NgChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -20,10 +21,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MascotaComponent,
     InformacionComponent,
     AnalisisComponent,
+    ModalComponent,
   ],
   exports:[
     DashboardComponent,
-    PagesComponent
+    PagesComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
