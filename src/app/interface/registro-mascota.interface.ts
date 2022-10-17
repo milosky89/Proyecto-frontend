@@ -1,6 +1,7 @@
 
 export interface mascotaForm{
 
+   id?:string;
    nombreMascota: string,
    especie:string,
    raza:string,

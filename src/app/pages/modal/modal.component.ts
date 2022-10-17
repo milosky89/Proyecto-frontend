@@ -4,6 +4,8 @@ import { CamposService } from 'src/app/auth/register/persona/services/campos.ser
 import { Mascota } from 'src/app/models/mascota.model';
 import { MascotasService } from 'src/app/services/mascotas.service';
 import { ModalService } from '../../services/modal.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-modal',
@@ -22,23 +24,21 @@ export class ModalComponent implements OnInit {
   alimentacion: string[] = [];
   adquisicion: string[] = [];
   estado: string[] = [];
+  idMas: string;
 
   public mascota: Mascota;
-  public id: string;
   public mascotaForm: FormGroup;
   public fomrSubmitted = false;
 
   constructor(public modalService: ModalService,
-              private camposService:CamposService,
-              private fb: FormBuilder,
-              private mascotaService: MascotasService,
-             ) {
-
-
-            }
+    private camposService: CamposService,
+    private fb: FormBuilder,
+    private mascotaService: MascotasService,
+  ) {
+    this.mascota = mascotaService.mascota;
+  }
 
   ngOnInit(): void {
-
     this.especie = this.camposService.especie;
     this.caracteristica = this.camposService.caracteristica;
     this.sexo = this.camposService.sexo;
@@ -67,6 +67,11 @@ export class ModalComponent implements OnInit {
     });
   }
 
+  consultaMascota(mascota: Mascota) {
+    this.mascota = mascota;
+    this.modalService.abrirModal();
+  }
+
   cerrarModal() {
     this.modalService.cerrarModal();
   }
@@ -79,8 +84,23 @@ export class ModalComponent implements OnInit {
       return false;
     }
   }
-
-
-
-
+  actualizarMascota() {
+    console.log(this.mascotaForm.value);
+    this.mascotaService.actualizarMascota(this.mascotaForm.value, this.mascota._id)
+      .subscribe({
+        next: (resp) => {
+          this.cerrarModal();
+          Swal.fire({
+            icon: 'success',
+            title: 'mascota modificada exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        },
+        error: (err) => {
+          this.cerrarModal();
+          Swal.fire('Error', err.error.msg, 'error');
+        }
+      })
+  }
 }

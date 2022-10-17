@@ -45,17 +45,17 @@ export class MascotaComponent implements OnInit {
     private masctoService: MascotasService,
     private fb: FormBuilder,
     private fileUploadService: FileUploadService,
-    private personaService: PersonaService,
-    public modalService: ModalService) {
+    private personaService: PersonaService
+    ) {
 
 
     this.id = personaService.persona.uid
+
 
   }
 
   ngOnInit(): void {
     this.cargarMascotas();
-
     this.especie = this.camposService.especie;
     this.caracteristica = this.camposService.caracteristica;
     this.sexo = this.camposService.sexo;
@@ -86,7 +86,7 @@ export class MascotaComponent implements OnInit {
   }
 
   cargarMascotas() {
-    this.masctoService.cargarMascotas(this.id).subscribe(({mascotas}) => {
+    this.masctoService.cargarMascotas(this.id).subscribe(({ mascotas }) => {
       this.mascotas = mascotas
     })
   }
@@ -128,8 +128,8 @@ export class MascotaComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-
-        this.limpiar()
+        this.limpiar();
+        this.cargarMascotas();
       },
       error: (err) => {
         Swal.fire('Error', err.error.msg, 'error');
@@ -173,19 +173,4 @@ export class MascotaComponent implements OnInit {
       });
     window.location.reload();
   }
-
-  editarMascota( mascota:Mascota){
-
-    this.modalService.abrirModal();
-    console.log(this.id);
-    this.modalService.consultarMascota(mascota._id).subscribe( resp => {
-        this.mascota = resp.mascota;
-        console.log(this.mascota);
-
-    })
-  }
-
-
-
-
 }

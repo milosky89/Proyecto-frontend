@@ -23,6 +23,9 @@ export class MascotasService {
 
   }
 
+  get uid(): string {
+    return this.mascota._id || '';
+  }
   get token():string {
     return localStorage.getItem('token') || '';
   }
@@ -57,10 +60,14 @@ export class MascotasService {
 
     const url = `${base_url}/mascotas/registro/${id}`
     return this.http.get<CargarMascotas>(url, this.headers)
+  }
 
-
-
-
+  actualizarMascota(formData: mascotaForm, id: string){
+    formData = {
+      ...formData
+    }
+    const url = `${base_url}/mascotas/${id}`
+    return this.http.put(url, formData, this.headers)
 
   }
 
