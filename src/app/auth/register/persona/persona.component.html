@@ -84,6 +84,14 @@
                      <p class="col text-danger" *ngIf="campoNoValido('email')" >* El correo electrónico es obligatorio</p>
             </div>
 
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="password"
+                     class="form-control"
+                     formControlName="clave">
+                     <p class="col text-danger" *ngIf="campoNoValido('clave')" >* La clave es obligatoria</p>
+            </div>
+
 
             <div class="form-group" style="margin-top: 50px;">
               <button type="submit" class="btn btn-block login-btn2">Registrar</button>
