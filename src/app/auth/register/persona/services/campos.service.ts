@@ -98,4 +98,18 @@ export class CamposService{
     return[...this._estadoUsuarios];
   }
 
+  private _variables: string[] = [
+    'Tipo de mascota',
+    'Edad',
+    'Estado actual',
+    'Adquisición',
+    'Esquema de vacunación',
+    'Esterilizacion',
+    'Sexo'
+  ];
+
+  get variables(): string[]{
+    return[...this._variables];
+  }
+
 }
