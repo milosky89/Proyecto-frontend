@@ -4,6 +4,9 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType } fr
 import { BaseChartDirective } from 'ng2-charts';
 import { CamposService } from 'src/app/auth/register/persona/services/campos.service';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { AnalisisService } from '../../services/analisis.service';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-analisis',
@@ -12,7 +15,13 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 })
 export class AnalisisComponent implements OnInit {
 
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   public fomrSubmitted = false;
+  //public variable : string;
+  public argumento1: any [] = []
+  public argumento2: any [] = [];
+  public argumento3: any [] = [];
+
 
   public graficaForm:FormGroup = this.fb.group({
 
@@ -24,7 +33,10 @@ export class AnalisisComponent implements OnInit {
   listaVariables: string[] =[];
 
   constructor(private fb: FormBuilder,
-              private camposService: CamposService,) { }
+              private camposService: CamposService,
+              private analisisGrafico: AnalisisService) {
+
+              }
 
   ngOnInit(): void {
     this.listaVariables = this.camposService.variables;
@@ -32,98 +44,60 @@ export class AnalisisComponent implements OnInit {
 
 
 
-  // grafica Barras
 
-  title = 'chartAngular';
+  grafica(){
+    this.fomrSubmitted = true;
+    this.graficaForm.value;
 
-  public barChartLegend = true;
-  public barChartPlugins = [];
-
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [
-    'Comuna 1 - Popular',
-    'Comuna 2 - Santa Cruz',
-    'Comuna 3 - Marinque',
-    'Comuna 4 - Aranjuez',
-    'Comuna 5 - Castilla',
-    'Comuna 6 - Doce de octubre',
-    'Comuna 7 - Robledo',
-    'Comuna 8 - Villa Hermosa',
-    'Comuna 9 - Buenos Aires',
-    'Comuna 10 - La Candelaria',
-    'Comuna 11 - Laureles Estadio',
-    'Comuna 12 - La América',
-    'Comuna 13 - San Javier',
-    'Comuna 14 - El Poblado',
-    'Comuna 15 - Guayabal',
-    'Comuna 16 - Belén',
-    'Comuna 50 - San Sebastián de Palmitas',
-    'Comuna 60 - San Cristóbal',
-    'Comuna 70 - Altavista',
-    'Comuna 80 - San Antonio de Prado',
-    'Comuna 90 - Santa Elena', ],
-    datasets: [
-      { data: [330, 600, 260, 700,567,345,120, 455, 100, 340,678,567,120,140,500,700,900,78,366,669,758], label: 'Perros' },
-      { data: [120, 455, 100, 340,678,567,330, 600, 260, 700,567,345,140,40,200,150,90,78,66,619,458], label: 'Gatos' }
-    ]
-  };
-
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
-  };
-/*
-  //contenido
-  chartData = [
-    {
-      data: [330, 600, 260, 700,567,345,120, 455, 100, 340,678,567,120,140,500,700,900,78,366,669,758],
-      label: 'Perros'
-    },
-    {
-      data: [120, 455, 100, 340,678,567,330, 600, 260, 700,567,345,140,40,200,150,90,78,66,619,458],
-      label: 'Gatos'
-    },
-
-  ];
-
-  //Etiquetas
-  chartLabels = [
-    'Comuna 1 - Popular',
-    'Comuna 2 - Santa Cruz',
-    'Comuna 3 - Marinque',
-    'Comuna 4 - Aranjuez',
-    'Comuna 5 - Castilla',
-    'Comuna 6 - Doce de octubre',
-    'Comuna 7 - Robledo',
-    'Comuna 8 - Villa Hermosa',
-    'Comuna 9 - Buenos Aires',
-    'Comuna 10 - La Candelaria',
-    'Comuna 11 - Laureles Estadio',
-    'Comuna 12 - La América',
-    'Comuna 13 - San Javier',
-    'Comuna 14 - El Poblado',
-    'Comuna 15 - Guayabal',
-    'Comuna 16 - Belén',
-    'Comuna 50 - San Sebastián de Palmitas',
-    'Comuna 60 - San Cristóbal',
-    'Comuna 70 - Altavista',
-    'Comuna 80 - San Antonio de Prado',
-    'Comuna 90 - Santa Elena',
-  ];
-
-  chartOptions = {
-    responsive: true
-  };
-*/
+     this.graficaForm.value
+    console.log('tipo', this.graficaForm.value);
 
 
-// Grafica de pie
-  public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
-  };
-  public pieChartLabels = [ [ 'Macho' ], [ 'Hembra' ] ];
-  public pieChartDatasets = [ {
-    data: [ 200, 100 ]
-  } ];
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+      this.analisisGrafico.getTipo()
+      .subscribe(({labels,values,}) =>{
+        this.argumento1 = values[0];
+        this.argumento2 = values[1];
+        this.argumento3 = values[2];
+
+
+          console.log('Comunas',this.argumento1);
+          console.log('perros',this.argumento2);
+          console.log('gatos',this.argumento2);
+
+
+
+      })
+
+
+
+  }
+
+  grafica2(){
+
+      this.analisisGrafico.getTipo()
+      .subscribe(data =>{
+        this.argumento1 = data.values[0];
+        this.argumento2 = data.values[1];
+        this.argumento3 = data.values[2];
+        //let lista1 = (JSON.stringify(this.argumento1));
+        //let lista2 = (JSON.stringify(this.argumento2));
+        //let lista3 = (JSON.stringify(this.argumento3));
+        //let resultado :any [] = []
+        this.argumento1.forEach(res => {
+        console.log(this.argumento1);
+
+        })
+
+      })
+
+    }
+
+    prueba(){
+
+    }
+
 }
+
+
+
+

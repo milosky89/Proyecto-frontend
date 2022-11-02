@@ -4,7 +4,9 @@
         <h2 style="color: #009efb">Gráfica</h2>
         <h6>Seleccione la variable para realizar el análisis gráfico</h6>
 
-        <form [formGroup]="graficaForm">
+        <form
+         [formGroup]="graficaForm"
+         (ngSubmit)="grafica2()">
           <div class="form-row align-items-center ">
             <div class="col-md-4">
               <select class="form-control"
@@ -17,38 +19,24 @@
                 </option>
               </select>
             </div>
-
+            <div class="col-auto my-1">
+              <button type="submit" class="btn btn-primary">Generar gráfica</button>
+            </div>
           </div>
+
+
+
+
         </form>
 <br>
 <br>
-        <div >
-          <canvas
-          baseChart class="flot-base w-100" height="680"
-          [data]="barChartData"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [legend]="barChartLegend"
-          [type]="'bar'">>
 
-          </canvas>
-        </div>
+
+
 
 <br>
 <br>
-        <div >
-          <canvas
-          baseChart class="flot-base w-100" height="680"
-          [type]="'pie'"
-          [datasets]="pieChartDatasets"
-          [labels]="pieChartLabels"
-          [options]="pieChartOptions"
-          [plugins]="pieChartPlugins"
-          [legend]="pieChartLegend">
 
-          </canvas>
-        </div>
-      </div>
 </div>
 
 

@@ -100,12 +100,13 @@ export class CamposService{
 
   private _variables: string[] = [
     'Tipo de mascota',
-    'Edad',
-    'Estado actual',
     'Adquisición',
-    'Esquema de vacunación',
+    'Sexo',
     'Esterilizacion',
-    'Sexo'
+    'Tipo de Alimentacion',
+    'Esquema de vacunación',
+    'Estado actual',
+
   ];
 
   get variables(): string[]{

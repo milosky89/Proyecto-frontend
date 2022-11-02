@@ -11,6 +11,7 @@ import { InformacionComponent } from './informacion/informacion.component';
 import { NgChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './modal/modal.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ModalComponent } from './modal/modal.component';
     RouterModule,
     NgChartsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule,
 ]
 })
 export class PagesModule { }
