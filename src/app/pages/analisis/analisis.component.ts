@@ -65,7 +65,7 @@ export class AnalisisComponent implements OnInit {
   }
 
   grafica2() {
-
+    this.fomrSubmitted = true;
     let mazamorra = this.graficaForm.value
     this.analisisGrafico.getTipo(mazamorra.listaVariables,mazamorra.listaComunas)
       .subscribe(({ labels, values }) => {
@@ -220,6 +220,16 @@ export class AnalisisComponent implements OnInit {
 
     ]
   };
+
+
+  campoNoValido(campo:string): boolean{
+
+    if(this.graficaForm.get(campo)?.invalid && this.fomrSubmitted){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 
 }

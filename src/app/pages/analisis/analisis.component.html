@@ -14,6 +14,7 @@
                 {{listaVariables}}
               </option>
             </select>
+            <p class="col text-danger" *ngIf="campoNoValido('listaVariables')" >* Este campo es obligatorio</p>
           </div>
           <div class="col-md-5">
             <select class="form-control" formControlName="listaComunas">
@@ -22,6 +23,7 @@
                 {{listaComunas}}
               </option>
             </select>
+            <p class="col text-danger" *ngIf="campoNoValido('listaComunas')" >* Este campo es obligatorio</p>
           </div>
           <div class="col-auto my-1">
             <button type="submit" class="btn btn-primary">Generar gráfica</button>
