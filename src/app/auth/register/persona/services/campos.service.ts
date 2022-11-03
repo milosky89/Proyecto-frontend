@@ -102,8 +102,8 @@ export class CamposService{
     'Tipo de mascota',
     'Adquisición',
     'Sexo',
-    'Esterilizacion',
-    'Tipo de Alimentacion',
+    'Esterilización',
+    'Tipo de Alimentación',
     'Esquema de vacunación',
     'Estado actual',
 

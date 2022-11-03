@@ -26,7 +26,21 @@ export class AnalisisComponent implements OnInit {
   public argumento6: any[] = [];
   public argumento7: any[] = [];
   public argumento8: any[] = [];
-  public argumento9: any[] = [];
+
+  public prueba: any[] = [];
+
+  public label1: string;
+  public label2: string;
+  public label3: string;
+  public label4: string;
+  public label5: string;
+  public label6: string;
+  public label7: string;
+  public label8: string;
+  public label9: string;
+  public label10: string;
+  public label11: string;
+  public label12: string;
 
   public graficaForm: FormGroup = this.fb.group({
 
@@ -47,28 +61,124 @@ export class AnalisisComponent implements OnInit {
 
   ngOnInit(): void {
     this.listaVariables = this.camposService.variables;
-    //this.grafica2();
-    this.listaComunas = this.camposService.comunas
+    this.listaComunas = this.camposService.comunas;
   }
 
   grafica2() {
-    //console.log(this.graficaForm.value);
-    let mazamorra = this.graficaForm.value
-    console.log(mazamorra);
 
+    let mazamorra = this.graficaForm.value
     this.analisisGrafico.getTipo(mazamorra.listaVariables,mazamorra.listaComunas)
       .subscribe(({ labels, values }) => {
-        this.barChartData.labels = labels;
-        this.barChartData.datasets = [{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-        this.argumento1 = values[0]
-        this.argumento2 = values[1]
-        this.argumento3 = values[2]
-        this.argumento4 = values[3]
-        this.argumento5 = values[4]
-        this.argumento6 = values[5]
-        this.argumento7 = values[6]
-        this.argumento8 = values[7]
-        this.chart.update();
+
+        this.prueba.push(labels,values)
+        switch(mazamorra.listaVariables){
+
+          case 'Tipo de mascota':
+              this.barChartData.labels = labels;
+              this.label1 = labels[0] = 'Perros'
+              this.label2 = labels[1] = 'Gatos'
+              this.label3 = labels[2] = 'Total de Mascotas'
+
+              this.barChartData.datasets =  this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+              this.argumento1 = values[0]
+              this.chart.update();
+          break;
+
+          case 'Tipo de Alimentación':
+            this.barChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Alimentos concentrados'
+            this.label2 = labels[1] = 'Perros - Alimentos caseros'
+            this.label3 = labels[2] = 'Perros - Alimentos mixtos'
+            this.label4 = labels[3] = 'Gatos - Alimentos concentrados'
+            this.label5 = labels[4] = 'Gatos - Alimentos caseros'
+            this.label6 = labels[5] = 'Gatos - Alimentos mixtos'
+            this.label7 = labels[6] = 'Alimentos concentrados'
+            this.label8 = labels[7] = 'Alimentos caseros'
+            this.label9 = labels[8] = 'Alimentos mixto'
+
+            this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.argumento1 = values[0]
+            this.chart.update();
+        break;
+
+          case 'Sexo':
+            this.barChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Macho'
+            this.label2 = labels[1] = 'Perros - Hembra'
+            this.label3 = labels[2] = 'Gatos - Macho'
+            this.label4 = labels[3] = 'Gatos - Hembra'
+            this.label5 = labels[4] = 'Mascotas Macho'
+            this.label6 = labels[5] = 'Mascotas Hembra'
+
+            this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.argumento1 = values[0]
+            this.chart.update();
+        break;
+
+        case 'Adquisición':
+          this.barChartData.labels = labels;
+          this.label1 = labels[0] = 'Perros - Comprados'
+          this.label2 = labels[1] = 'Perros - Adoptados'
+          this.label3 = labels[2] = 'Gatos - Comprados'
+          this.label4 = labels[3] = 'Gatos - Adoptados'
+          this.label5 = labels[4] = 'Mascotas compradas'
+          this.label6 = labels[5] = 'Mascotas Adoptadas'
+
+          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+          this.argumento1 = values[0]
+          this.chart.update();
+      break;
+
+      case 'Esterilización':
+          this.barChartData.labels = labels;
+          this.label1 = labels[0] = 'Perros - Esterilizados'
+          this.label2 = labels[1] = 'Perros - No Esterilizados'
+          this.label3 = labels[2] = 'Gatos - Esterilizados'
+          this.label4 = labels[3] = 'Gatos - No Esterilizados'
+          this.label5 = labels[4] = 'Mascotas Esterilizadas'
+          this.label6 = labels[5] = 'Mascotas No Esterilizadas'
+
+          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+          this.argumento1 = values[0]
+          this.chart.update();
+      break;
+
+      case 'Esquema de vacunación':
+          this.barChartData.labels = labels;
+          this.label1 = labels[0] = 'Perros - Esquema completo'
+          this.label2 = labels[1] = 'Perros - Esquema incompleto'
+          this.label3 = labels[2] = 'Gatos - Esquema completo'
+          this.label4 = labels[3] = 'Gatos - Esquema incompleto'
+          this.label5 = labels[4] = 'Mascotas Esquema completo'
+          this.label6 = labels[5] = 'Mascotas Esquema incompleto'
+
+          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+          this.argumento1 = values[0]
+          this.chart.update();
+      break;
+
+      case 'Estado actual':
+          this.barChartData.labels = labels;
+          this.label1 = labels[0] = 'Perros - Vivos'
+          this.label2 = labels[1] = 'Perros - Fallecidos'
+          this.label3 = labels[2] = 'Perros - Perdidos'
+          this.label4 = labels[3] = 'Perros - En Adopción'
+          this.label5 = labels[4] = 'Gatos - Vivos'
+          this.label6 = labels[5] = 'Gatos - Fallecidos'
+          this.label7 = labels[6] = 'Gatos - Perdidos'
+          this.label8 = labels[7] = 'Gatos - En Adopción'
+          this.label9 = labels[8] = 'Mascotas Vivas'
+          this.label10 = labels[9] = 'Mascotan Fallecidas'
+          this.label11 = labels[10] = 'Mascotas Perdidas'
+          this.label12 = labels[11] = 'Mascotas En Adopción'
+
+          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+          this.argumento1 = values[0]
+          this.chart.update();
+      break;
+
+        }
+
       })
 
   }
@@ -110,6 +220,7 @@ export class AnalisisComponent implements OnInit {
 
     ]
   };
+
 
 }
 

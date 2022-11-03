@@ -10,6 +10,7 @@ const base_url = environment.base_url;
 })
 export class AnalisisService {
 
+  public prueba : any[] = [];
   constructor(private http: HttpClient) { }
 
 
@@ -38,16 +39,4 @@ export class AnalisisService {
 
   }
 
-
-  getTipo2(){
-
-    return this.analisisGrafico()
-            .pipe(
-                map(data => {data
-                  console.log(data);
-
-                })
-              )
-
-  }
 }

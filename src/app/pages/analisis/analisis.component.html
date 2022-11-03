@@ -6,19 +6,18 @@
 
       <form [formGroup]="graficaForm" (ngSubmit)="grafica2()">
         <div class="form-row align-items-center ">
-          <div class="col-md-4">
-            <label>Variable</label>
+          <div class="col-md-5">
+
             <select class="form-control" formControlName="listaVariables">
-              <option value="" selected>Seleccione...</option>
+              <option value="" selected>Seleccione una variable...</option>
               <option *ngFor="let listaVariables of listaVariables" [value]="listaVariables">
                 {{listaVariables}}
               </option>
             </select>
           </div>
-          <div class="col-md-4">
-            <label>Comunas</label>
+          <div class="col-md-5">
             <select class="form-control" formControlName="listaComunas">
-              <option value="" selected>Seleccione...</option>
+              <option value="" selected>Selecciona una comuna...</option>
               <option *ngFor="let listaComunas of listaComunas" [value]="listaComunas">
                 {{listaComunas}}
               </option>
@@ -28,22 +27,31 @@
             <button type="submit" class="btn btn-primary">Generar gráfica</button>
           </div>
         </div>
-
-
-
-
       </form>
       <br>
       <br>
-      <div style="display: block">
-        <canvas baseChart class="flot-base w-100" height="450"
-        [data]="barChartData"
-        [options]="barChartOptions"
-        [plugins]="barChartPlugins"
-        [type]="barChartType"
-       >
-
-       </canvas>
-      </div>
 
     </div>
+  </div>
+</div>
+
+    <div class="row">
+      <!-- column -->
+        <!-- column -->
+        <div class="col-12">
+          <div class="card" style="border-radius:1rem;  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
+              <div class="card-body">
+                  <h4 class="card-title">Mascotas</h4>
+                  <canvas baseChart class="flot-base w-100" height="500"
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [type]="barChartType"
+                  >
+                </canvas>
+              </div>
+          </div>
+      </div>
+
+      <!-- column -->
+  </div>
