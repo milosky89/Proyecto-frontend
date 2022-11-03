@@ -18,83 +18,98 @@ export class AnalisisComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   public fomrSubmitted = false;
   //public variable : string;
-  public argumento1: any [] = []
-  public argumento2: any [] = [];
-  public argumento3: any [] = [];
+  public argumento1: any[] = []
+  public argumento2: any[] = [];
+  public argumento3: any[] = [];
+  public argumento4: any[] = [];
+  public argumento5: any[] = [];
+  public argumento6: any[] = [];
+  public argumento7: any[] = [];
+  public argumento8: any[] = [];
+  public argumento9: any[] = [];
 
-
-  public graficaForm:FormGroup = this.fb.group({
+  public graficaForm: FormGroup = this.fb.group({
 
     listaVariables: ['', Validators.required,],
+    listaComunas: ['', Validators.required,],
 
   });
 
   //Llenar selectores
-  listaVariables: string[] =[];
+  listaVariables: string[] = [];
+  listaComunas: string[] = [];
 
   constructor(private fb: FormBuilder,
-              private camposService: CamposService,
-              private analisisGrafico: AnalisisService) {
+    private camposService: CamposService,
+    private analisisGrafico: AnalisisService) {
 
-              }
+  }
 
   ngOnInit(): void {
     this.listaVariables = this.camposService.variables;
+    //this.grafica2();
+    this.listaComunas = this.camposService.comunas
   }
 
+  grafica2() {
+    //console.log(this.graficaForm.value);
+    let mazamorra = this.graficaForm.value
+    console.log(mazamorra);
 
-
-
-  grafica(){
-    this.fomrSubmitted = true;
-    this.graficaForm.value;
-
-     this.graficaForm.value
-    console.log('tipo', this.graficaForm.value);
-
-
-      this.analisisGrafico.getTipo()
-      .subscribe(({labels,values,}) =>{
-        this.argumento1 = values[0];
-        this.argumento2 = values[1];
-        this.argumento3 = values[2];
-
-
-          console.log('Comunas',this.argumento1);
-          console.log('perros',this.argumento2);
-          console.log('gatos',this.argumento2);
-
-
-
+    this.analisisGrafico.getTipo(mazamorra.listaVariables,mazamorra.listaComunas)
+      .subscribe(({ labels, values }) => {
+        this.barChartData.labels = labels;
+        this.barChartData.datasets = [{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+        this.argumento1 = values[0]
+        this.argumento2 = values[1]
+        this.argumento3 = values[2]
+        this.argumento4 = values[3]
+        this.argumento5 = values[4]
+        this.argumento6 = values[5]
+        this.argumento7 = values[6]
+        this.argumento8 = values[7]
+        this.chart.update();
       })
-
-
 
   }
 
-  grafica2(){
+  //grafica
 
-      this.analisisGrafico.getTipo()
-      .subscribe(data =>{
-        this.argumento1 = data.values[0];
-        this.argumento2 = data.values[1];
-        this.argumento3 = data.values[2];
-        //let lista1 = (JSON.stringify(this.argumento1));
-        //let lista2 = (JSON.stringify(this.argumento2));
-        //let lista3 = (JSON.stringify(this.argumento3));
-        //let resultado :any [] = []
-        this.argumento1.forEach(res => {
-        console.log(this.argumento1);
-
-        })
-
-      })
-
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 0
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
     }
+  };
+  public barChartType: ChartType = 'bar';
+  public barChartPlugins = [
+    ChartDataLabels
+  ];
 
-    prueba(){
+  public barChartData: ChartData<'bar'> = {
+    labels: [ ],
+    datasets: [
+      {
+        data: [],
+        label: '',
+        backgroundColor: []
+      },
 
-    }
+    ]
+  };
 
 }
 

@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: [ 'Personas', 'Empresas', 'Total' ],
+    labels: [  ],
     datasets: [
       { data: [  ],
         label: 'Usuarios Registrados',
