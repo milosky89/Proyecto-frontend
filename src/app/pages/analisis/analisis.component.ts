@@ -96,7 +96,7 @@ export class AnalisisComponent implements OnInit {
             this.label8 = labels[7] = 'Alimentos caseros'
             this.label9 = labels[8] = 'Alimentos mixto'
 
-            this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.barChartData.datasets = [{ data: [],label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
             this.argumento1 = values[0]
             this.chart.update();
         break;
