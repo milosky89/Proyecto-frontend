@@ -59,12 +59,21 @@ export class AnalisisComponent implements OnInit {
   private datosGato3 = [];
   private datosGato4 = [];
   public cargando: boolean = false;
+  public cargando2: boolean = false;
+
+  public mostrarGrafico1 = false;
+  public mostrarGrafico2 = false
+
 
   public graficaForm: FormGroup = this.fb.group({
 
-    listaVariables: [''],
-    listaGraficos: ['', Validators.required,],
-    listaComunas:['',]
+    listaVariables: ['',Validators.required],
+  });
+
+  public grafica2Form: FormGroup = this.fb.group({
+
+    listaVariables: ['',Validators.required],
+    listaComunas:['',Validators.required]
   });
 
   //Llenar selectores
@@ -101,14 +110,17 @@ export class AnalisisComponent implements OnInit {
   }
 
   consultas(){
-    this.fomrSubmitted = true;
+
 
     if(this.graficaForm.invalid){
       console.log('invalido');
+      this.mostrarGrafico1 = false
       return;
     }
+    this.fomrSubmitted = true;
     let mazamorra = this.graficaForm.value
     this.cargando = true;
+    this.mostrarGrafico1 = true;
     this.analisisGrafico.graficas(mazamorra.listaVariables)
         .subscribe(res =>{
 
@@ -450,6 +462,15 @@ export class AnalisisComponent implements OnInit {
     }
   }
 
+  campoNoValido2(campo:string): boolean{
+
+    if(this.grafica2Form.get(campo)?.invalid && this.fomrSubmitted){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   //Grafica 2
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
@@ -496,17 +517,22 @@ export class AnalisisComponent implements OnInit {
   public label8: any;
 
   graficaTorta() {
+
+    let mazamorra = this.grafica2Form.value
+
+    if (this.grafica2Form.invalid) {
+      console.log('invalido');
+      this.mostrarGrafico2 = false;
+      return;
+    }
+
     this.fomrSubmitted = true;
-    let mazamorra = this.graficaForm.value
-console.log(mazamorra.listaVariables);
-console.log(mazamorra.listaComunas);
-
-
+    this.cargando2 = true;
+    this.mostrarGrafico2 = true;
     this.analisisGrafico.grafica2(mazamorra.listaVariables,mazamorra.listaComunas)
       .subscribe(({ labels, values }) => {
 
         switch (mazamorra.listaVariables) {
-
 
           case 'Tipo de mascota':
             console.log('Entro');
@@ -515,6 +541,7 @@ console.log(mazamorra.listaComunas);
             this.label1 = labels[0] = 'Perros'
             this.label2 = labels[1] = 'Gatos'
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
+            this.cargando2 = false;
             this.chart?.update();
             break;
 
@@ -528,6 +555,8 @@ console.log(mazamorra.listaComunas);
             this.label6 = labels[5] = 'Gatos - Alimentos mixtos'
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#227466", "#684991", "#9AC463","#6B7775", "#F37E7E", "#0A7CBE"] }]
+
+            this.cargando2 = false;
             this.chart.update();
             break;
 
@@ -539,6 +568,7 @@ console.log(mazamorra.listaComunas);
             this.label4 = labels[3] = 'Gatos - Hembra'
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.cargando2 = false;
             this.chart.update();
             break;
 
@@ -549,8 +579,8 @@ console.log(mazamorra.listaComunas);
             this.label3 = labels[2] = 'Gatos - Comprados'
             this.label4 = labels[3] = 'Gatos - Adoptados'
 
-            this.pieChartData.datasets = this.argumento1 = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-            this.argumento1 = values[0]
+            this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.cargando2 = false;
             this.chart.update();
             break;
 
@@ -562,6 +592,7 @@ console.log(mazamorra.listaComunas);
             this.label4 = labels[3] = 'Gatos - No Esterilizados'
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.cargando2 = false;
             this.chart.update();
             break;
 
@@ -573,6 +604,7 @@ console.log(mazamorra.listaComunas);
             this.label4 = labels[3] = 'Gatos - Esquema incompleto'
 
             this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.cargando2 = false;
             this.chart.update();
             break;
 
@@ -588,6 +620,7 @@ console.log(mazamorra.listaComunas);
             this.label8 = labels[7] = 'Gatos - En Adopción'
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.cargando2 = false;
             this.chart.update();
             break;
 

@@ -1,95 +1,87 @@
+<div class="col-lg-6 col-xlg-4 col-md-4">
+  <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
+    <div class="card-body">
+      <div class="form-group col-md-12">
+        <input type="text" class="form-control" placeholder="Buscar mascota..." #txtBusqueda
+          (keyup)="buscar(txtBusqueda.value)">
+      </div>
+    </div>
+  </div>
+</div>
 
-                <div class="col-lg-6 col-xlg-4 col-md-4">
-                  <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
-                      <div class="card-body">
-                        <div class="form-group col-md-12">
-                          <input  type="text"
-                                  class="form-control"
-                                  placeholder="Buscar mascota..."
-                                  #txtBusqueda
-                                  (keyup)="buscar(txtBusqueda.value)">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<div class="col-lg-12 col-xlg-9 col-md-7" *ngIf="cargando">
+  <div class="alert alert-info text-center">
+    <h4 class="alert-heading">Cargando</h4>
+    <i class="fa fa-spin fa-refresh fa-2x"></i>
+    <p class="mb-0">Por favor espere</p>
+  </div>
 
-                  <div class="col-lg-12 col-xlg-9 col-md-7"
-                  *ngIf="cargando">
-                      <div class="alert alert-info text-center">
-                        <h4 class="alert-heading">Cargando</h4>
-                        <i class="fa fa-spin fa-refresh fa-2x"></i>
-                        <p class="mb-0">Por favor espere</p>
-                      </div>
+</div>
 
-                  </div>
-
-                <!-- column -->
-                <div class="col-sm-12"
-                      *ngIf="!cargando">
-                    <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
-                        <div class="card-body">
-                          <h2 style="color: #009efb">Total de mascotas:  {{totalmascotas}}</h2>
-                          <br>
-                            <div class="table-responsive text-nowrap">
-                              <table class="table table-striped">
-                                <thead class="table-dark" style="text-align: center;">
-                                  <tr >
-                                    <th class="campos">Nombre mascota</th>
-                                    <th class="campos">Especie</th>
-                                    <th class="campos">Sexo</th>
-                                    <th class="campos">Comuna</th>
-                                    <th class="campos">Propietario</th>
-                                    <th class="campos">Celular</th>
-                                    <th class="campos">Adquisición</th>
-                                    <th class="campos">Estado</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr
-                                      *ngFor="let mascota of mascotas">
-                                    <td>
-                                      <div>
-                                        <img src="../../../assets/images/mascota.png" class="rounded-circle" width="40">
-                                        <span class="ms-3 fw-normal" >{{mascota.nombreMascota}}</span>
-                                      </div>
-                                    </td>
-                                    <td>
-                                      <span class="ms-3 fw-normal">{{mascota.especie}}</span>
-                                    </td>
-                                    <td>
-                                      <span class="ms-3 fw-normal">{{mascota.sexo}}</span>
-                                    </td>
-                                    <td>
-                                      <span class="ms-3 fw-normal" style="text-align:center ;">{{mascota.comuna}}</span>
-                                    </td>
-                                    <td>
-                                      <span class="ms-3 fw-normal">{{mascota.persona?.nombre}} {{mascota.persona?.apellido}}</span>
-                                    </td>
-                                    <td>
-                                      <span class="ms-3 fw-normal">{{mascota.persona?.celular}}</span>
-                                    </td>
-                                    <td>
-                                      <span class="ms-3 fw-normal">{{mascota.adquisicion}}</span>
-                                    </td>
-                                    <td style="text-align:center ;">
-                                      <span *ngIf="mascota.estado == 'Vivo'" class="badge bg-success py-1">{{mascota.estado}}</span>
-                                      <span *ngIf="mascota.estado == 'Muerto'" class="badge bg-primary py-1">{{mascota.estado}}</span>
-                                      <span *ngIf="mascota.estado == 'Perdido'" class="badge bg-danger py-1">{{mascota.estado}}</span>
-                                      <span *ngIf="mascota.estado == 'En Adopción'" class="badge bg-warning py-1">{{mascota.estado}}</span>
-
-                                    </td>
-                                    <td>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                              <div style="text-align:center ;" *ngIf="txtBusqueda.value.length === 0">
-                                <button (click)="cambiarPagina(-10)" class="btn btn-secundary">Anterior</button>
-                                &nbsp;
-                                <button (click)="cambiarPagina(10)" class="btn btn-secundary">Siguiente</button>
-                              </div>
-                        </div>
-                    </div>
+<!-- column -->
+<div class="col-sm-12" *ngIf="!cargando">
+  <div class="card" style="border-radius: 1rem; box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
+    <div class="card-body">
+      <h2 style="color: #009efb">Total de mascotas: {{totalmascotas}}</h2>
+      <br>
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead class="table-dark" style="text-align: center;">
+            <tr>
+              <th class="campos">Nombre mascota</th>
+              <th class="campos">Especie</th>
+              <th class="campos">Sexo</th>
+              <th class="campos">Comuna</th>
+              <th class="campos">Propietario</th>
+              <th class="campos">Celular</th>
+              <th class="campos">Adquisición</th>
+              <th class="campos">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mascota of mascotas">
+              <td>
+                <div>
+                  <img src="../../../assets/images/mascota.png" class="rounded-circle" width="40">
+                  <span class="ms-3 fw-normal">{{mascota.nombreMascota}}</span>
                 </div>
+              </td>
+              <td>
+                <span class="ms-3 fw-normal">{{mascota.especie}}</span>
+              </td>
+              <td>
+                <span class="ms-3 fw-normal">{{mascota.sexo}}</span>
+              </td>
+              <td>
+                <span class="ms-3 fw-normal" style="text-align:center ;">{{mascota.comuna}}</span>
+              </td>
+              <td>
+                <span class="ms-3 fw-normal">{{mascota.persona?.nombre}} {{mascota.persona?.apellido}}</span>
+              </td>
+              <td>
+                <span class="ms-3 fw-normal">{{mascota.persona?.celular}}</span>
+              </td>
+              <td>
+                <span class="ms-3 fw-normal">{{mascota.adquisicion}}</span>
+              </td>
+              <td style="text-align:center ;">
+                <span *ngIf="mascota.estado == 'Vivo'" class="badge bg-success py-1">{{mascota.estado}}</span>
+                <span *ngIf="mascota.estado == 'Muerto'" class="badge bg-primary py-1">{{mascota.estado}}</span>
+                <span *ngIf="mascota.estado == 'Perdido'" class="badge bg-danger py-1">{{mascota.estado}}</span>
+                <span *ngIf="mascota.estado == 'En Adopción'" class="badge bg-warning py-1">{{mascota.estado}}</span>
 
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align:center ;" *ngIf="txtBusqueda.value.length === 0">
+        <button (click)="cambiarPagina(-10)" class="btn btn-secundary">Anterior</button>
+        &nbsp;
+        <button (click)="cambiarPagina(10)" class="btn btn-secundary">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>
