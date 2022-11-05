@@ -16,27 +16,22 @@ export class AnalisisService {
 
   analisisGrafico(){
    // return this.http.get(`${base_url}/analisis/analisis?consulta=${{variable}}`);
-   return this.http.get(`${base_url}/analisis/analisis?consulta=Tipo de mascota`);
+   return this.http.get(`${base_url}/analisis/analisis?consulta=Sexo`);
   }
-  analisisGrafico2(variable: string, comuna:string){
+  /*analisisGrafico2(variable: string, comuna:string){
     let queryParams = new HttpParams();
     queryParams = queryParams.append("consulta",variable)
     queryParams = queryParams.append("comuna",comuna)
     // return this.http.get(`${base_url}/analisis/analisis?consulta=${{variable}}`);
     return this.http.get(`${base_url}/analisis/analisis2`,{params:queryParams});
-   }
+   }*/
 
-  getTipo(variable: string, comuna:string){
-
-    return this.analisisGrafico2(variable,comuna)
-            .pipe(
-                map(data =>{
-                  const labels = Object.keys(data)
-                  const values = Object.values(data);
-                  return { labels,values};
-                })
-              )
-
+   graficas(variable: string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("consulta",variable)
+    return this.http.get(`${base_url}/analisis/analisis`,{params:queryParams});
   }
+
+
 
 }

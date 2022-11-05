@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartDataset, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import * as pluginDataLabels from 'chartjs-plugin-annotation';
+import { NgChartsModule } from 'ng2-charts';
 import { CamposService } from 'src/app/auth/register/persona/services/campos.service';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { AnalisisService } from '../../services/analisis.service';
-import { map } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+
 
 
 @Component({
@@ -17,210 +19,429 @@ export class AnalisisComponent implements OnInit {
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   public fomrSubmitted = false;
-  //public variable : string;
-  public argumento1: any[] = []
-  public argumento2: any[] = [];
-  public argumento3: any[] = [];
-  public argumento4: any[] = [];
-  public argumento5: any[] = [];
-  public argumento6: any[] = [];
-  public argumento7: any[] = [];
-  public argumento8: any[] = [];
+  public barChartLabels: NgChartsModule[] ;
+  //Tipo de grafico que queremos: ejem: line, bar, radar
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [pluginDataLabels];
+  //Datos que vamos a cargar en las graficas
+  public barChartData: ChartDataset[];
+  public chartColors;
+  private categoria;
+  private comuna: string;
+  //Arreglo de los datos que vamos a pasar
+  private datos = [];
+  private gato1 =[]
+  private gato2 =[]
+  private gato3 =[]
+  private gato4 =[]
+  private perro1 =[]
+  private perro2 =[]
+  private perro3 =[]
+  private perro4 =[]
 
-  public prueba: any[] = [];
+  private perroV1: string;
+  private perroV2: string;
+  private perroV3: string;
+  private perroV4: string;
+  private gatoV1:string;
+  private gatoV2: string;
+  private gatoV3:string;
+  private gatoV4:string;
 
-  public label1: string;
-  public label2: string;
-  public label3: string;
-  public label4: string;
-  public label5: string;
-  public label6: string;
-  public label7: string;
-  public label8: string;
-  public label9: string;
-  public label10: string;
-  public label11: string;
-  public label12: string;
+  //Arreglo de las categorias que vamos a pasar
+  private datosPerros1 = [];
+  private datosPerros2 = [];
+  private datosPerros3 = [];
+  private datosPerros4 = [];
+  private datosGato1 = [];
+  private datosGato2 = [];
+  private datosGato3 = [];
+  private datosGato4 = [];
+  public cargando: boolean = false;
 
   public graficaForm: FormGroup = this.fb.group({
 
     listaVariables: ['', Validators.required,],
-    listaComunas: ['', Validators.required,],
+    listaGraficos: ['', Validators.required,],
 
   });
 
   //Llenar selectores
   listaVariables: string[] = [];
-  listaComunas: string[] = [];
+  listaGraficos: string[] = [];
+
 
   constructor(private fb: FormBuilder,
     private camposService: CamposService,
     private analisisGrafico: AnalisisService) {
 
+
   }
 
   ngOnInit(): void {
     this.listaVariables = this.camposService.variables;
-    this.listaComunas = this.camposService.comunas;
+    this.listaGraficos = this.camposService.graficos;
   }
 
-  grafica2() {
-    this.fomrSubmitted = true;
-    let mazamorra = this.graficaForm.value
-    this.analisisGrafico.getTipo(mazamorra.listaVariables,mazamorra.listaComunas)
-      .subscribe(({ labels, values }) => {
+  limpiar(){
+    this.graficaForm = this.fb.group({
+      listaGraficos: '',
+      listaVariables: ''
+    })
+    this.categoria = '',
+    this.comuna = ''
+     this.datos = [];
+     this.gato1 =[]
 
-        this.prueba.push(labels,values)
-        switch(mazamorra.listaVariables){
+
+  }
+
+  consultas(){
+    this.fomrSubmitted = true;
+
+    if(this.graficaForm.invalid){
+      console.log('invalido');
+      return;
+    }
+    let mazamorra = this.graficaForm.value
+    this.cargando = true;
+    this.analisisGrafico.graficas(mazamorra.listaVariables)
+        .subscribe(res =>{
+
+          switch(mazamorra.listaVariables){
 
           case 'Tipo de mascota':
-              this.barChartData.labels = labels;
-              this.label1 = labels[0] = 'Perros'
-              this.label2 = labels[1] = 'Gatos'
-              this.label3 = labels[2] = 'Total de Mascotas'
+                  this.categoria = res;
+                for (const cate of this.categoria) {
+                  this.comuna = cate.comuna.split(',');
+                  this.datos.push(this.comuna);
+                  this.datosPerros1.push(cate.perro);
+                  this.datosGato1.push(cate.gato);
+                }
 
-              this.barChartData.datasets =  this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-              this.argumento1 = values[0]
-              this.chart.update();
+                for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+                }
+
+                for (let index = 0; index < this.datosGato1.length; index++) {
+                  this.gatoV1 = this.datosGato1.join()
+                  this.gato1[0] = this.gatoV1.split(',')
+
+                }
+                  this.cargarDatos(this.datos, this.perro1[0],this.gato1[0]);
+                  this.cargando = false;
+
           break;
 
           case 'Tipo de Alimentación':
-            this.barChartData.labels = labels;
-            this.label1 = labels[0] = 'Perros - Alimentos concentrados'
-            this.label2 = labels[1] = 'Perros - Alimentos caseros'
-            this.label3 = labels[2] = 'Perros - Alimentos mixtos'
-            this.label4 = labels[3] = 'Gatos - Alimentos concentrados'
-            this.label5 = labels[4] = 'Gatos - Alimentos caseros'
-            this.label6 = labels[5] = 'Gatos - Alimentos mixtos'
-            this.label7 = labels[6] = 'Alimentos concentrados'
-            this.label8 = labels[7] = 'Alimentos caseros'
-            this.label9 = labels[8] = 'Alimentos mixto'
 
-            this.barChartData.datasets = [{ data: [],label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-            this.argumento1 = values[0]
-            this.chart.update();
-        break;
+            this.categoria = res;
+            console.log(this.categoria);
+              for (const cate of this.categoria) {
+                this.comuna = cate.comuna.split(',');
+                this.datos.push(this.comuna);
+
+                this.datosGato1.push(cate.gatoCA);
+                this.datosGato2.push(cate.gatoCO);
+                this.datosPerros1.push(cate.perroCA);
+                this.datosPerros2.push(cate.perroCO);
+              }
+              for (let index = 0; index < this.datosGato1.length; index++) {
+                this.gatoV1 = this.datosGato1.join()
+                this.gato1[0] = this.gatoV1.split(',')
+              }
+              for (let index = 0; index < this.datosGato2.length; index++) {
+                this.gatoV2 = this.datosGato2.join()
+                this.gato2[0] = this.gatoV2.split(',')
+              }
+              for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+              }
+              for (let index = 0; index < this.datosPerros2.length; index++) {
+                this.perroV2 = this.datosPerros2.join()
+                this.perro2[0] = this.perroV2.split(',')
+              }
+              this.cargarDatos2(this.datos,this.gato1[0],this.gato2[0],this.perro1[0],this.perro2[0]);
+              this.cargando = false;
+
+          break;
 
           case 'Sexo':
-            this.barChartData.labels = labels;
-            this.label1 = labels[0] = 'Perros - Macho'
-            this.label2 = labels[1] = 'Perros - Hembra'
-            this.label3 = labels[2] = 'Gatos - Macho'
-            this.label4 = labels[3] = 'Gatos - Hembra'
-            this.label5 = labels[4] = 'Mascotas Macho'
-            this.label6 = labels[5] = 'Mascotas Hembra'
+            this.categoria = res;
+            console.log(this.categoria);
+              for (const cate of this.categoria) {
+                this.comuna = cate.comuna.split(',');
+                this.datos.push(this.comuna);
 
-            this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-            this.argumento1 = values[0]
-            this.chart.update();
-        break;
+                this.datosGato1.push(cate.gatoH);
+                this.datosGato2.push(cate.gatoM);
+                this.datosPerros1.push(cate.perroH);
+                this.datosPerros2.push(cate.perroM);
+              }
+              for (let index = 0; index < this.datosGato1.length; index++) {
+                this.gatoV1 = this.datosGato1.join()
+                this.gato1[0] = this.gatoV1.split(',')
+              }
+              for (let index = 0; index < this.datosGato2.length; index++) {
+                this.gatoV2 = this.datosGato2.join()
+                this.gato2[0] = this.gatoV2.split(',')
+              }
+              for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+              }
+              for (let index = 0; index < this.datosPerros2.length; index++) {
+                this.perroV2 = this.datosPerros2.join()
+                this.perro2[0] = this.perroV2.split(',')
+              }
+              this.cargarDatos3(this.datos,this.gato1[0],this.gato2[0],this.perro1[0],this.perro2[0]);
+              this.cargando = false;
 
-        case 'Adquisición':
-          this.barChartData.labels = labels;
-          this.label1 = labels[0] = 'Perros - Comprados'
-          this.label2 = labels[1] = 'Perros - Adoptados'
-          this.label3 = labels[2] = 'Gatos - Comprados'
-          this.label4 = labels[3] = 'Gatos - Adoptados'
-          this.label5 = labels[4] = 'Mascotas compradas'
-          this.label6 = labels[5] = 'Mascotas Adoptadas'
+          break;
 
-          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-          this.argumento1 = values[0]
-          this.chart.update();
-      break;
+          case 'Adquisición':
+            this.categoria = res;
+            console.log(this.categoria);
+              for (const cate of this.categoria) {
+                this.comuna = cate.comuna.split(',');
+                this.datos.push(this.comuna);
 
-      case 'Esterilización':
-          this.barChartData.labels = labels;
-          this.label1 = labels[0] = 'Perros - Esterilizados'
-          this.label2 = labels[1] = 'Perros - No Esterilizados'
-          this.label3 = labels[2] = 'Gatos - Esterilizados'
-          this.label4 = labels[3] = 'Gatos - No Esterilizados'
-          this.label5 = labels[4] = 'Mascotas Esterilizadas'
-          this.label6 = labels[5] = 'Mascotas No Esterilizadas'
+                this.datosGato1.push(cate.gatoA);
+                this.datosGato2.push(cate.gatoC);
+                this.datosPerros1.push(cate.perroA);
+                this.datosPerros2.push(cate.perroC);
+              }
+              for (let index = 0; index < this.datosGato1.length; index++) {
+                this.gatoV1 = this.datosGato1.join()
+                this.gato1[0] = this.gatoV1.split(',')
+              }
+              for (let index = 0; index < this.datosGato2.length; index++) {
+                this.gatoV2 = this.datosGato2.join()
+                this.gato2[0] = this.gatoV2.split(',')
+              }
+              for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+              }
+              for (let index = 0; index < this.datosPerros2.length; index++) {
+                this.perroV2 = this.datosPerros2.join()
+                this.perro2[0] = this.perroV2.split(',')
+              }
+              this.cargarDatos4(this.datos,this.gato1[0],this.gato2[0],this.perro1[0],this.perro2[0]);
+              this.cargando = false;
 
-          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-          this.argumento1 = values[0]
-          this.chart.update();
-      break;
+          break;
 
-      case 'Esquema de vacunación':
-          this.barChartData.labels = labels;
-          this.label1 = labels[0] = 'Perros - Esquema completo'
-          this.label2 = labels[1] = 'Perros - Esquema incompleto'
-          this.label3 = labels[2] = 'Gatos - Esquema completo'
-          this.label4 = labels[3] = 'Gatos - Esquema incompleto'
-          this.label5 = labels[4] = 'Mascotas Esquema completo'
-          this.label6 = labels[5] = 'Mascotas Esquema incompleto'
+          case 'Esterilización':
+            this.categoria = res;
+            console.log(this.categoria);
+              for (const cate of this.categoria) {
+                this.comuna = cate.comuna.split(',');
+                this.datos.push(this.comuna);
 
-          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-          this.argumento1 = values[0]
-          this.chart.update();
-      break;
+                this.datosGato1.push(cate.gatoN);
+                this.datosGato2.push(cate.gatoS);
+                this.datosPerros1.push(cate.perroN);
+                this.datosPerros2.push(cate.perroS);
+              }
+              for (let index = 0; index < this.datosGato1.length; index++) {
+                this.gatoV1 = this.datosGato1.join()
+                this.gato1[0] = this.gatoV1.split(',')
+              }
+              for (let index = 0; index < this.datosGato2.length; index++) {
+                this.gatoV2 = this.datosGato2.join()
+                this.gato2[0] = this.gatoV2.split(',')
+              }
+              for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+              }
+              for (let index = 0; index < this.datosPerros2.length; index++) {
+                this.perroV2 = this.datosPerros2.join()
+                this.perro2[0] = this.perroV2.split(',')
+              }
+              this.cargarDatos5(this.datos,this.gato1[0],this.gato2[0],this.perro1[0],this.perro2[0]);
+              this.cargando = false;
+          break;
 
-      case 'Estado actual':
-          this.barChartData.labels = labels;
-          this.label1 = labels[0] = 'Perros - Vivos'
-          this.label2 = labels[1] = 'Perros - Fallecidos'
-          this.label3 = labels[2] = 'Perros - Perdidos'
-          this.label4 = labels[3] = 'Perros - En Adopción'
-          this.label5 = labels[4] = 'Gatos - Vivos'
-          this.label6 = labels[5] = 'Gatos - Fallecidos'
-          this.label7 = labels[6] = 'Gatos - Perdidos'
-          this.label8 = labels[7] = 'Gatos - En Adopción'
-          this.label9 = labels[8] = 'Mascotas Vivas'
-          this.label10 = labels[9] = 'Mascotan Fallecidas'
-          this.label11 = labels[10] = 'Mascotas Perdidas'
-          this.label12 = labels[11] = 'Mascotas En Adopción'
+          case 'Esquema de vacunación':
+            this.categoria = res;
+            console.log(this.categoria);
+              for (const cate of this.categoria) {
+                this.comuna = cate.comuna.split(',');
+                this.datos.push(this.comuna);
 
-          this.barChartData.datasets = this.argumento1 =[{ data: Object.values(values),label: 'Cantidad',backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0","#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
-          this.argumento1 = values[0]
-          this.chart.update();
-      break;
+                this.datosGato1.push(cate.gatoN);
+                this.datosGato2.push(cate.gatoS);
+                this.datosPerros1.push(cate.perroN);
+                this.datosPerros2.push(cate.perroS);
+              }
+              for (let index = 0; index < this.datosGato1.length; index++) {
+                this.gatoV1 = this.datosGato1.join()
+                this.gato1[0] = this.gatoV1.split(',')
+              }
+              for (let index = 0; index < this.datosGato2.length; index++) {
+                this.gatoV2 = this.datosGato2.join()
+                this.gato2[0] = this.gatoV2.split(',')
+              }
+              for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+              }
+              for (let index = 0; index < this.datosPerros2.length; index++) {
+                this.perroV2 = this.datosPerros2.join()
+                this.perro2[0] = this.perroV2.split(',')
+              }
+              this.cargarDatos6(this.datos,this.gato1[0],this.gato2[0],this.perro1[0],this.perro2[0]);
+              this.cargando = false;
+
+          break;
+
+          case 'Estado actual':
+            this.categoria = res;
+            console.log(this.categoria);
+              for (const cate of this.categoria) {
+                this.comuna = cate.comuna.split(',');
+                this.datos.push(this.comuna);
+
+                this.datosGato1.push(cate.gatoAdopcion);
+                this.datosGato2.push(cate.gatoMuerto);
+                this.datosGato3.push(cate.gatoPerdido);
+                this.datosGato4.push(cate.gatoVivo);
+                this.datosPerros1.push(cate.perroAdopcion);
+                this.datosPerros2.push(cate.perroMuerto);
+                this.datosPerros3.push(cate.perroPerdido);
+                this.datosPerros4.push(cate.perroVivo);
+              }
+              for (let index = 0; index < this.datosGato1.length; index++) {
+                this.gatoV1 = this.datosGato1.join()
+                this.gato1[0] = this.gatoV1.split(',')
+              }
+              for (let index = 0; index < this.datosGato2.length; index++) {
+                this.gatoV2 = this.datosGato2.join()
+                this.gato2[0] = this.gatoV2.split(',')
+              }
+              for (let index = 0; index < this.datosGato3.length; index++) {
+                this.gatoV3 = this.datosGato3.join()
+                this.gato3[0] = this.gatoV3.split(',')
+              }
+              for (let index = 0; index < this.datosGato4.length; index++) {
+                this.gatoV4 = this.datosGato4.join()
+                this.gato4[0] = this.gatoV4.split(',')
+              }
+              for (let index = 0; index < this.datosPerros1.length; index++) {
+                this.perroV1 = this.datosPerros1.join()
+                this.perro1[0] = this.perroV1.split(',')
+              }
+              for (let index = 0; index < this.datosPerros2.length; index++) {
+                this.perroV2 = this.datosPerros2.join()
+                this.perro2[0] = this.perroV2.split(',')
+              }
+              for (let index = 0; index < this.datosPerros3.length; index++) {
+                this.perroV3 = this.datosPerros3.join()
+                this.perro3[0] = this.perroV3.split(',')
+              }
+              for (let index = 0; index < this.datosPerros4.length; index++) {
+                this.perroV4 = this.datosPerros4.join()
+                this.perro4[0] = this.perroV4.split(',')
+              }
+              this.cargarDatos7(this.datos,this.gato1[0],this.gato2[0],this.gato3[0],this.gato4[0],this.perro1[0],this.perro2[0],this.perro3[0],this.perro4[0]);
+              this.cargando = false;
+
+          break;
 
         }
+        this.datos = [];
+    }
+  )}
 
-      })
+  cargarDatos(comunas, datosPerros, datosGatos) {
+    this.barChartData = [];
+    this.barChartLabels = ['Perros','Gatos'];
 
+
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosPerros[index],datosGatos[index]], label: comunas [index]});
+    }
   }
 
-  //grafica
+  cargarDatos2(comunas, datosGato1,datosGato2, datosPerros1,datosPerros2) {
+    this.barChartData = [];
+    this.barChartLabels = ['Alimentos Caseros Gatos','Alimentos Concentrados Gatos','Alimentos Caseros Perros','Alimentos Concentrados Perros']
 
-  public barChartOptions: ChartConfiguration['options'] = {
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosGato1[index],datosGato2[index],datosPerros1[index],datosPerros2[index]], label: comunas [index]});
+    }
+  }
+
+  cargarDatos3(comunas, datosGato1,datosGato2, datosPerros1,datosPerros2) {
+    this.barChartData = [];
+    this.barChartLabels = ['Gatos - Hembra','Gatos - Macho','Perros - Hembra','Perros - Macho']
+
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosGato1[index],datosGato2[index],datosPerros1[index],datosPerros2[index]], label: comunas [index]});
+    }
+  }
+
+  cargarDatos4(comunas, datosGato1,datosGato2, datosPerros1,datosPerros2) {
+    this.barChartData = [];
+    this.barChartLabels = ['Gatos - Adopción','Gatos - compra','Perros - Adopción','Perros - Compra']
+
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosGato1[index],datosGato2[index],datosPerros1[index],datosPerros2[index]], label: comunas [index]});
+    }
+  }
+
+  cargarDatos5(comunas, datosGato1,datosGato2, datosPerros1,datosPerros2) {
+    this.barChartData = [];
+    this.barChartLabels = ['Gatos no esterilizados','Gatos esterilizados','Perros no esterilizados','Perros esterilizados']
+
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosGato1[index],datosGato2[index],datosPerros1[index],datosPerros2[index]], label: comunas [index]});
+    }
+  }
+
+  cargarDatos6(comunas, datosGato1,datosGato2, datosPerros1,datosPerros2) {
+    this.barChartData = [];
+    this.barChartLabels = ['Esquema incompleto gatos','Esquema completo gatos','Esquema incompleto perros','Esquema completo perros']
+
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosGato1[index],datosGato2[index],datosPerros1[index],datosPerros2[index]], label: comunas [index]});
+    }
+  }
+
+  cargarDatos7(comunas, datosGato1,datosGato2,datosGato3,datosGato4, datosPerros1,datosPerros2,datosPerros3,datosPerros4) {
+    this.barChartData = [];
+    this.barChartLabels = ['Gatos en adopción','Gatos Fallecidos','Gatos perdidos','Gatos vivos','Perros en adopción','Perros Fallecidos','Perros perdidos','Perros vivos']
+
+    for (const index in comunas) {
+      this.barChartData.push({ data: [datosGato1[index],datosGato2[index],datosGato3[index],datosGato4[index],datosPerros1[index],datosPerros2[index],datosPerros3[index],datosPerros4[index]], label: comunas [index]});
+    }
+  }
+
+  //Grafica de barras
+  public barChartOptions:  ChartConfiguration['options'] = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      x: {},
-      y: {
-        min: 0
-      }
-    },
+    scales: { x: {}, y: {min:0} },
     plugins: {
       legend: {
         display: true,
       },
       datalabels: {
         anchor: 'end',
-        align: 'end'
+        align: 'end',
       }
     }
   };
-  public barChartType: ChartType = 'bar';
-  public barChartPlugins = [
-    ChartDataLabels
-  ];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [ ],
-    datasets: [
-      {
-        data: [],
-        label: '',
-        backgroundColor: []
-      },
+  //Grafica de torta
+  public radarChartOptions:  ChartConfiguration['options'] = {
+    responsive: true,
 
-    ]
   };
-
 
   campoNoValido(campo:string): boolean{
 
@@ -232,8 +453,7 @@ export class AnalisisComponent implements OnInit {
   }
 
 
+
 }
-
-
 
 

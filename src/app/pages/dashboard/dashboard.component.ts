@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
     },
     plugins: {
       legend: {
-        display: true,
+        display: false,
       },
       datalabels: {
         anchor: 'end',

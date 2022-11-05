@@ -64,6 +64,12 @@ export class CamposService{
     return[...this._alimentacion];
   }
 
+  private _graficos: string[] = ['Barras','Circular','Radar']
+
+  get graficos(): string[]{
+    return[...this._graficos];
+  }
+
   private _comunas: string[] = [
     'Comuna 1',
     'Comuna 2',
