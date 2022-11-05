@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChartConfiguration, ChartDataset, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartDataset, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-annotation';
 import { NgChartsModule } from 'ng2-charts';
 import { CamposService } from 'src/app/auth/register/persona/services/campos.service';
 import { AnalisisService } from '../../services/analisis.service';
-import { EMPTY } from 'rxjs';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 
@@ -62,15 +62,15 @@ export class AnalisisComponent implements OnInit {
 
   public graficaForm: FormGroup = this.fb.group({
 
-    listaVariables: ['', Validators.required,],
+    listaVariables: [''],
     listaGraficos: ['', Validators.required,],
-
+    listaComunas:['',]
   });
 
   //Llenar selectores
   listaVariables: string[] = [];
   listaGraficos: string[] = [];
-
+  listaComunas: string[] = [];
 
   constructor(private fb: FormBuilder,
     private camposService: CamposService,
@@ -82,17 +82,20 @@ export class AnalisisComponent implements OnInit {
   ngOnInit(): void {
     this.listaVariables = this.camposService.variables;
     this.listaGraficos = this.camposService.graficos;
+    this.listaComunas = this.camposService.comunas;
   }
 
   limpiar(){
     this.graficaForm = this.fb.group({
       listaGraficos: '',
-      listaVariables: ''
+      listaVariables: '',
+      listaComunas: ''
     })
     this.categoria = '',
     this.comuna = ''
      this.datos = [];
      this.gato1 =[]
+     this.argumento1 = []
 
 
   }
@@ -437,11 +440,6 @@ export class AnalisisComponent implements OnInit {
     }
   };
 
-  //Grafica de torta
-  public radarChartOptions:  ChartConfiguration['options'] = {
-    responsive: true,
-
-  };
 
   campoNoValido(campo:string): boolean{
 
@@ -452,8 +450,151 @@ export class AnalisisComponent implements OnInit {
     }
   }
 
+  //Grafica 2
+  // Pie
+  public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+      datalabels: {
+        formatter: (value, ctx) => {
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+        },
+      },
+    }
+  };
+  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [   ],
+    datasets: [ {
+      data: [  ]
+    } ]
+  };
+  public pieChartType: ChartType = 'pie';
+  public pieChartPlugins = [ ChartDataLabels ];
+
+  toggleLegend(): void {
+    if (this.pieChartOptions?.plugins?.legend) {
+      this.pieChartOptions.plugins.legend.display = !this.pieChartOptions.plugins.legend.display;
+    }
+
+    this.chart?.render();
+  }
+
+  public argumento1: any;
+  public label1: any;
+  public label2: any;
+  public label3: any;
+  public label4: any;
+  public label5: any;
+  public label6: any;
+  public label7: any;
+  public label8: any;
+
+  graficaTorta() {
+    this.fomrSubmitted = true;
+    let mazamorra = this.graficaForm.value
+console.log(mazamorra.listaVariables);
+console.log(mazamorra.listaComunas);
 
 
+    this.analisisGrafico.grafica2(mazamorra.listaVariables,mazamorra.listaComunas)
+      .subscribe(({ labels, values }) => {
+
+        switch (mazamorra.listaVariables) {
+
+
+          case 'Tipo de mascota':
+            console.log('Entro');
+
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros'
+            this.label2 = labels[1] = 'Gatos'
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
+            this.chart?.update();
+            break;
+
+            case 'Tipo de Alimentación':
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Alimentos concentrados'
+            this.label2 = labels[1] = 'Perros - Alimentos caseros'
+            this.label3 = labels[2] = 'Perros - Alimentos mixtos'
+            this.label4 = labels[3] = 'Gatos - Alimentos concentrados'
+            this.label5 = labels[4] = 'Gatos - Alimentos caseros'
+            this.label6 = labels[5] = 'Gatos - Alimentos mixtos'
+
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#227466", "#684991", "#9AC463","#6B7775", "#F37E7E", "#0A7CBE"] }]
+            this.chart.update();
+            break;
+
+            case 'Sexo':
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Macho'
+            this.label2 = labels[1] = 'Perros - Hembra'
+            this.label3 = labels[2] = 'Gatos - Macho'
+            this.label4 = labels[3] = 'Gatos - Hembra'
+
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.chart.update();
+            break;
+
+          case 'Adquisición':
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Comprados'
+            this.label2 = labels[1] = 'Perros - Adoptados'
+            this.label3 = labels[2] = 'Gatos - Comprados'
+            this.label4 = labels[3] = 'Gatos - Adoptados'
+
+            this.pieChartData.datasets = this.argumento1 = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.argumento1 = values[0]
+            this.chart.update();
+            break;
+
+          case 'Esterilización':
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Esterilizados'
+            this.label2 = labels[1] = 'Perros - No Esterilizados'
+            this.label3 = labels[2] = 'Gatos - Esterilizados'
+            this.label4 = labels[3] = 'Gatos - No Esterilizados'
+
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.chart.update();
+            break;
+
+          case 'Esquema de vacunación':
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Esquema completo'
+            this.label2 = labels[1] = 'Perros - Esquema incompleto'
+            this.label3 = labels[2] = 'Gatos - Esquema completo'
+            this.label4 = labels[3] = 'Gatos - Esquema incompleto'
+
+            this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.chart.update();
+            break;
+
+          case 'Estado actual':
+            this.pieChartData.labels = labels;
+            this.label1 = labels[0] = 'Perros - Vivos'
+            this.label2 = labels[1] = 'Perros - Fallecidos'
+            this.label3 = labels[2] = 'Perros - Perdidos'
+            this.label4 = labels[3] = 'Perros - En Adopción'
+            this.label5 = labels[4] = 'Gatos - Vivos'
+            this.label6 = labels[5] = 'Gatos - Fallecidos'
+            this.label7 = labels[6] = 'Gatos - Perdidos'
+            this.label8 = labels[7] = 'Gatos - En Adopción'
+
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.chart.update();
+            break;
+
+
+
+        }
+      })
+  }
 }
-
 

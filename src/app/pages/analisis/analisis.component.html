@@ -3,33 +3,57 @@
     <div class="card-body">
       <h6>Seleccione la variable y el tipo de gráfico que desea visualizar</h6>
 
-      <form [formGroup]="graficaForm" (ngSubmit)="consultas()">
-        <div class="form-row align-items-center ">
-          <div class="col-md-5">
+      <form [formGroup]="graficaForm">
 
-            <select class="form-control" formControlName="listaVariables">
-              <option value="" selected>Seleccione una variable</option>
-              <option *ngFor="let listaVariables of listaVariables" [value]="listaVariables">
-                {{listaVariables}}
-              </option>
-            </select>
-            <p class="col text-danger" *ngIf="campoNoValido('listaVariables')">* Este campo es obligatorio</p>
-          </div>
+        <div  class="form-row align-items-center ">
           <div class="col-md-5">
             <select class="form-control" formControlName="listaGraficos">
-              <option value="" selected>Seleccione tipo de gráfico</option>
+              <option value="" selected>Tipo de gráfico</option>
               <option *ngFor="let listaGraficos of listaGraficos" [value]="listaGraficos">
                 {{listaGraficos}}
               </option>
             </select>
-            <p class="col text-danger" *ngIf="campoNoValido('listaGraficos')">* Este campo es obligatorio</p>
           </div>
+        </div>
+        <br>
+        <div  class="form-row align-items-center "  *ngIf="graficaForm.get('listaGraficos').value === 'Barras'" >
+          <div class="col-md-5" >
+            <select class="form-control" formControlName="listaVariables">
+              <option value="" selected>Variable</option>
+              <option *ngFor="let listaVariables of listaVariables" [value]="listaVariables">
+                {{listaVariables}}
+              </option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary mr-1" (click)="consultas()">Generar gráfica</button>
+          <button type="submit" class="btn btn-danger mb-0" (click)="limpiar()">Limpiar </button>
+        </div>
+        <div class="form-row align-items-center " *ngIf="graficaForm.get('listaGraficos').value === 'Circular'">
+          <div class="col-md-4">
 
+            <select class="form-control" formControlName="listaVariables">
+              <option value="" selected>Variable</option>
+              <option *ngFor="let listaVariables of listaVariables" [value]="listaVariables">
+                {{listaVariables}}
+              </option>
+            </select>
+
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" formControlName="listaComunas">
+              <option value="" selected>Comuna</option>
+              <option *ngFor="let listaComunas of listaComunas" [value]="listaComunas">
+                {{listaComunas}}
+              </option>
+            </select>
+
+          </div>
+          <div class="col-4">
+            <button type="button" class="btn btn-primary mr-1" (click)="graficaTorta()">Generar gráfica</button>
+            <button type="button" class="btn btn-danger" >Limpiar</button>
+          </div>
         </div>
-        <div style="margin-top: 10px;">
-          <button type="submit" class="btn btn-primary" style="margin-right: 10px;" >Generar gráfica</button>
-          <button type="button" class="btn btn-danger" (click)="limpiar()">Limpiar</button>
-        </div>
+
       </form>
       <br>
       <br>
@@ -49,19 +73,38 @@
 
 <div class="row">
   <!-- column -->
-  <div class="col-12"  *ngIf="!cargando">
+  <div class="col-8" *ngIf="graficaForm.get('listaGraficos').value === 'Barras'" >
     <div class="card" style="border-radius:1rem;  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
-      <div class="card-body">
+      <div class="card-body" *ngIf="!cargando;">
         <h2 style="color: #009efb" class="card-title">Gráfica</h2>
         <div style="display: block" *ngIf="barChartData">
-          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+          <canvas baseChart  [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
             [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="barChartType">
           </canvas>
+
         </div>
       </div>
     </div>
   </div>
-
+</div>
   <!-- column -->
 
-</div>
+    <!-- column -->
+    <div class="col-8" *ngIf="graficaForm.get('listaGraficos').value === 'Circular'">
+      <div class="card" style="border-radius:1rem;  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
+        <div class="card-body">
+          <h2 style="color: #009efb" class="card-title">Gráfica 2</h2>
+          <div style="display: block" >
+            <div style="display: block" *ngIf="pieChartData">
+              <canvas baseChart
+                      [data]="pieChartData"
+                      [type]="pieChartType"
+                      [options]="pieChartOptions"
+                      [plugins]="pieChartPlugins">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+

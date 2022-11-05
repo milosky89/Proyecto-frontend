@@ -64,7 +64,7 @@ export class CamposService{
     return[...this._alimentacion];
   }
 
-  private _graficos: string[] = ['Barras','Circular','Radar']
+  private _graficos: string[] = ['Barras','Circular']
 
   get graficos(): string[]{
     return[...this._graficos];
@@ -88,7 +88,7 @@ export class CamposService{
     'Comuna 15',
     'Comuna 16',
     'Comuna 50',
-    'Comuna 60',
+    'Comuna 60 - San Cristóbal',
     'Comuna 70',
     'Comuna 80',
     'Comuna 90',
