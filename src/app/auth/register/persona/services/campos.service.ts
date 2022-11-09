@@ -88,7 +88,7 @@ export class CamposService{
     'Comuna 15',
     'Comuna 16',
     'Comuna 50',
-    'Comuna 60 - San Cristóbal',
+    'Comuna 60',
     'Comuna 70',
     'Comuna 80',
     'Comuna 90',
