@@ -542,7 +542,7 @@ export class AnalisisComponent implements OnInit {
             this.label2 = labels[1] = 'Gatos'
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
-            this.chart?.update();
+            //this.chart?.update();
             break;
 
             case 'Tipo de Alimentación':
@@ -557,7 +557,7 @@ export class AnalisisComponent implements OnInit {
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
 
             this.cargando2 = false;
-            this.chart.update();
+            //this.chart.update();
             break;
 
             case 'Sexo':
@@ -569,7 +569,7 @@ export class AnalisisComponent implements OnInit {
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
-            this.chart.update();
+            //this.chart.update();
             break;
 
           case 'Adquisición':
@@ -581,7 +581,7 @@ export class AnalisisComponent implements OnInit {
 
             this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
-            this.chart.update();
+            //this.chart.update();
             break;
 
           case 'Esterilización':
@@ -593,7 +593,7 @@ export class AnalisisComponent implements OnInit {
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
-            this.chart.update();
+            //this.chart.update();
             break;
 
           case 'Esquema de vacunación':
@@ -605,7 +605,7 @@ export class AnalisisComponent implements OnInit {
 
             this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
-            this.chart.update();
+            //this.chart.update();
             break;
 
           case 'Estado actual':
@@ -621,7 +621,7 @@ export class AnalisisComponent implements OnInit {
 
             this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(72,181,163, 0.2)', 'rgba(192, 186, 153, 0.2)','rgba(145,210,144, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
-            this.chart.update();
+            //this.chart.update();
             break;
 
 

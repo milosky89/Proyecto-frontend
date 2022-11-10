@@ -80,7 +80,7 @@
   <div class="col-8" *ngIf="mostrarGrafico2 ">
     <div class="card" style="border-radius:1rem;  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);">
       <div class="card-body" *ngIf="!cargando2;">
-        <h2 style="color: #009efb" class="card-title">Gráfica 2</h2>
+        <h2 style="color: #009efb" class="card-title">Gráfica</h2>
           <div style="display: block" *ngIf="pieChartData">
             <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
               [plugins]="pieChartPlugins">
