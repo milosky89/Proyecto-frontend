@@ -554,7 +554,7 @@ export class AnalisisComponent implements OnInit {
             this.label5 = labels[4] = 'Gatos - Alimentos caseros'
             this.label6 = labels[5] = 'Gatos - Alimentos mixtos'
 
-            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#227466", "#684991", "#9AC463","#6B7775", "#F37E7E", "#0A7CBE"] }]
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
 
             this.cargando2 = false;
             this.chart.update();
@@ -567,7 +567,7 @@ export class AnalisisComponent implements OnInit {
             this.label3 = labels[2] = 'Gatos - Macho'
             this.label4 = labels[3] = 'Gatos - Hembra'
 
-            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
             this.chart.update();
             break;
@@ -579,7 +579,7 @@ export class AnalisisComponent implements OnInit {
             this.label3 = labels[2] = 'Gatos - Comprados'
             this.label4 = labels[3] = 'Gatos - Adoptados'
 
-            this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
             this.chart.update();
             break;
@@ -591,7 +591,7 @@ export class AnalisisComponent implements OnInit {
             this.label3 = labels[2] = 'Gatos - Esterilizados'
             this.label4 = labels[3] = 'Gatos - No Esterilizados'
 
-            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
             this.chart.update();
             break;
@@ -603,7 +603,7 @@ export class AnalisisComponent implements OnInit {
             this.label3 = labels[2] = 'Gatos - Esquema completo'
             this.label4 = labels[3] = 'Gatos - Esquema incompleto'
 
-            this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.pieChartData.datasets =  [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(220,249,228, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
             this.chart.update();
             break;
@@ -619,7 +619,7 @@ export class AnalisisComponent implements OnInit {
             this.label7 = labels[6] = 'Gatos - Perdidos'
             this.label8 = labels[7] = 'Gatos - En Adopción'
 
-            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ["#F0E009", "#BD1616", "#0962C9", "#B34B1C", "#0ABEA0", "#C9087263", "#3D0380", "#363636", "#01250C", "#0A7CBE"] }]
+            this.pieChartData.datasets = [{ data: Object.values(values), label: 'Cantidad', backgroundColor: ['rgba(72,181,163, 0.2)', 'rgba(192, 186, 153, 0.2)','rgba(145,210,144, 0.2)', 'rgba(176, 194, 242, 0.2)', 'rgba(111, 183, 214, 0.2),rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'] }]
             this.cargando2 = false;
             this.chart.update();
             break;
